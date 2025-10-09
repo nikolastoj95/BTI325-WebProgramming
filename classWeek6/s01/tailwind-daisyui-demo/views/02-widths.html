@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        h1 {
+            font-size:32px;
+            margin:10px 0px;
+        }
+    </style>
+</head>
+<body class="my-10">    
+    <p>These examples show how to manipulate widths, but heights work the same. Just use the <code class="bg-amber-100">h-</code> prefix instead of <code class="bg-amber-100">w-</code></code></p>
+
+    <a href="https://tailwindcss.com/docs/width" target="_blank" class="btn btn-outline">
+        Width documentation
+    </a>
+
+    <h1>Fixed Widths</h1>
+    <div class="divider"></div>
+    <p>Width = 4px</p>
+    <img class="w-4" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png">
+    <p>Width = 64px</p>
+    <img class="w-16" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png">
+    <p>Width = 64px</p>
+    <img class="w-32" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png">
+
+    <p>Height = 64px, w = 24px</p>
+    <img class="h-64 w-24" src="https://static.vecteezy.com/system/resources/thumbnails/002/098/203/small_2x/silver-tabby-cat-sitting-on-green-background-free-photo.jpg">
+
+    <div class="divider"></div>
+
+    <h1>Percentage Widths</h1>
+    <p>This div is set to width = 500px.</p>
+    <div style="width:500px;" class="border-8 border-neutral">          
+        <!-- four things inside box -->      
+        <p class="w-full bg-red-300">This p is 100% of the div</p>
+        <p class="w-screen bg-blue-300">This p is 100% of the screen</p>
+        
+          <!-- w-1/2 means half of parent which is 500px -->  
+        <p class="w-1/2 bg-amber-300">This p is 50% of the div</p>
+      
+        <p class="w-[50vw] bg-purple-300">This p is 50% of the screen</p>
+    </div>
+
+</body>
+</html>

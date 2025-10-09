@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        h1 {font-size:30px; margin:40px 0px;}
+        p { font-size:20px; margin:10px 0px;}  
+        code {background-color: #ffee0054;}      
+    </style>
+</head>
+<body>
+    <div class="container mx-auto">
+
+        <h1 class="text-2xl">Layout</h1>
+        
+        <p>This page's content is wrapped in a <code>container</code> element</p>        
+        <p>The container element is centered</p>
+        <p>This means there is equal whitespace on the left and right sides of the page</p>
+
+        <!-- ----------------------------------------------------  -->
+
+        <h1 class="text-2xl">Row</h1>
+
+        <p>The <code>flex flex-row</code> properties force the child elements to appear in a row</p>        
+        <p>The div is known as a "flex-container" </p>
+        <p>The p elements are known as "flex items"</p>
+        <!-- flex: creating a row of content -->     
+        <div class="border flex flex-row">
+            <p class="p-2 bg-accent">Paragraph #1</p>
+            <p class="p-2 bg-error">Paragraph #2</p>
+            <p class="p-2 bg-info">Paragraph #3</p>
+            <p class="p-2 bg-warning">Paragraph #4</p>
+        </div>
+
+
+        <p>The <code>justify-end</code> property moves all flex items to the end of the container</p>
+        <!-- flex: move all items to end -->
+        <div class="border flex flex-row justify-end">
+            <p class="p-2 bg-accent">Paragraph #1</p>
+            <p class="p-2 bg-error">Paragraph #2</p>
+            <p class="p-2 bg-info">Paragraph #3</p>
+            <p class="p-2 bg-warning">Paragraph #4</p>
+        </div>
+
+        <p>The <code>justify-center</code> property moves all flex items to the middle of the container</p>
+        <!-- flex: move all items to center -->
+        <div class="border flex flex-row justify-center">
+            <p class="p-2 bg-accent">Paragraph #1</p>
+            <p class="p-2 bg-error">Paragraph #2</p>
+            <p class="p-2 bg-info">Paragraph #3</p>
+            <p class="p-2 bg-warning">Paragraph #4</p>
+        </div>
+
+        <p>The <code>justify-evenly</code> property creates equal spacing between all flex items.</p>
+        <!-- flex: create equal spacing between each element -->
+        <div class="border flex flex-row justify-evenly">
+            <p class="p-2 bg-accent">Paragraph #1</p>
+            <p class="p-2 bg-error">Paragraph #2</p>
+            <p class="p-2 bg-info">Paragraph #3</p>
+            <p class="p-2 bg-warning">Paragraph #4</p>
+        </div>
+
+        <p>The <code>justify-between</code> property positions the first flex item at the beginning of the container, and the last flex item at the end.</p>
+        <p>Remaining items are evenly distributed between the first and last items. </p>
+        <!-- flex: automatically calculate space between two elements -->
+        <div class="border flex flex-row justify-between">
+            <p class="p-2 bg-accent">Paragraph #1</p>
+            <p class="p-2 bg-error">Paragraph #2</p>
+            <p class="p-2 bg-info">Paragraph #3</p>
+        </div>
+
+
+        <!-- ----------------------------------------------------  -->
+
+        <h1 class="text-2xl">Aligning Items</h1>
+    
+        <p>When different types of elements are forced into a row, they may appear like this:</p>
+        <!-- by default, the items are not aligned along the y-axis -->
+        <div class="border flex flex-row">
+            <p>Here is a paragraph</p>
+            <a href="#" class="btn btn-primary">Here is a link</a>
+            <img class="w-64" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"/>
+        </div>
+
+        <p>Using the <code>items-center</code> property forces the elements to align themselves in the center of the y-axis:</p>
+        <!-- adding items-center aligns the items along the y-axis -->
+        <div class="border flex flex-row items-center">
+            <p>Here is a paragraph</p>
+            <a href="#" class="btn btn-primary">Here is a link</a>
+            <img class="w-64" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"/>
+        </div>
+
+        <p>Using the <code>items-end</code> property forces the elements to align themselves along the bottom of the y-axis:</p>
+        <!-- adding items-center aligns the items along the y-axis -->
+        <div class="border flex flex-row items-end">
+            <p>Here is a paragraph</p>
+            <a href="#" class="btn btn-primary">Here is a link</a>
+            <img class="w-64" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"/>
+        </div>
+
+        <!-- ----------------------------------------------------  -->
+
+        <h1 class="text-2xl">Grouping elements toegther</h1>
+
+        <p>You can create groups of flex items by wrapping the items in <code>div</code> elements.</p>
+        <p>In this example, paragraph #1 and paragraph #2 belong to the same group (group 1)</p>
+        <p>The image and "Charmander" text belong to another group (group 2)</p>
+        <p>Group #1 and Group #2 are positioned in a row</p>
+        
+        <div class="flex flex-row justify-evenly my-10">
+            <div class="border">
+                <p>Paragraph #1</p>
+                <p>Paragraph #2</p>
+            </div>
+
+            <div class="border">
+                <img class="w-64" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"/>
+                <p>Charmander</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
