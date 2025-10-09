@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dog Walking Service</h1>
+    <h2>History Of Completed Walks</h2>
+    <ul>
+        <li><a href="/history">View History</a></li>        
+    </ul>
+
+    <h2>Testing the Walk Dog Endpoint</h2>
+    <table>        
+        <tr>
+            <td>Different cities: Gabriel (Ottawa), Buddy (Toronto)</td>
+            <td style="padding-left:10px;"><a href="/walk/buddy427/with/gokafor">Click</a></td>
+        </tr>
+        <tr>
+            <td>Same city, but breeds do not match: Amina (Golden Retriever), Fido (Yorkie)</td>
+            <td style="padding-left:10px;"><a href="/walk/fido601/with/ahassan">Click</a></td>
+        </tr>
+        <tr>
+            <td>Same city, no breed preference breed (Gabriel, Rocky)</td>
+            <td style="padding-left:10px;"><a href="/walk/rocky301/with/gokafor">Click</a></td>
+        </tr>
+        <tr>
+            <td>Same city, same breed: Amina (Golden Retriever), Buddy (Golden Retriever)</td>
+            <td style="padding-left:10px;"><a href="/walk/buddy427/with/ahassan">Click</a></td>
+        </tr>
+    </table>
+
+    <h2>Testing the Get Rating Endpoint </h2>
+    <ul>
+        <li>Get rating for:<a href="ratings/get/rpatel">Raj Patel (rpatel)</a></li>
+        <li>Get rating for:<a href="ratings/get/mchen">Ming Chen (mchen)</a></li>
+    </ul>
+
+</body>
+</html>
