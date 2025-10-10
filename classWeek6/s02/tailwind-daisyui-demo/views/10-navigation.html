@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        code {
+            background-color: #ffee0054;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="prose container mx-auto my-10">
+        <h1>Navbars</h1>
+        
+        <p>In DaisyUI, the navigation menu is composed of these elements:</p>
+        <ol>
+            <li>navbar container (<code>class = navbar</code>)</li>
+            <li>navbar items (logo, menu items, etc): Containers for the content to display in the navbar</li>
+        </ol>
+        
+        <p>The position of the navbar items are controlled by these classes</p>
+        <ol>
+            <li><code>navbar-start</code>: Moves content to start of the navbar</li>
+            <li><code>navbar-center</code>: Moves content to center of the navbar</li>
+            <li><code>navbar-end</code>: Moves content to end of the navbar</li>            
+        </ol>
+
+        <p>Sometimes, the documentation examples will use the <code>flex</code> properties instead. Both approaches are valid.</p>
+
+        <a href="https://daisyui.com/components/navbar/" target="_blank" class="btn btn-outline">
+            Navbar documentation
+        </a>
+
+        <p>See the code below for the navbar:</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Here is the example code for the navbar -->
+    <div class="navbar bg-primary-content">
+        <!-- logo -->
+        <div class="navbar-start">
+            <a class="btn btn-ghost text-xl" href="https://daisyui.com/components/navbar/">
+                daisyUI
+            </a>
+        </div>
+        <!-- menu items -->
+        <div class="navbar-end">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>            
+            </ul>
+        </div>
+    </div>
+</html>

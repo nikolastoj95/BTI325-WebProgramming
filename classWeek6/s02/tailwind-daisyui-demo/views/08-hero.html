@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        code {background-color: #ffee0054;}
+    </style>
+</head>
+
+<body>       
+    <div class="prose container mx-auto my-10">
+        <h1>Hero Section</h1>
+        <p>Typically, a hero section occupies the full height and width of the screen.</p>
+
+        <p>In DaisyUI, the hero is composed of 3 container elements:</p>
+        <ol>
+            <li>hero container (<code>div class = hero</code>)</li>
+            <li>content container (<code>div class = hero-content</code>)</li>
+            <li>content wrapper that sets the width of the content (<code>div class = max-w-lg</code>)</li>
+        </ol>
+
+        <p>The content you want displayed in the hero are placed in the content wrapper element (<code>div class = max-w-lg</code>)</p>
+
+        <p>The size of the hero is controlled with these classes:</p>
+        <ol>
+            <li><code>min-h-screen</code>: sets the hero to the full height/width of the screen</li>
+            <li><code>max-w-lg</code>: sets the width of the hero content</li>                        
+        </ol>
+        
+        <p>See the code below for the hero:</p>
+    </div>
+
+    
+    <!-- Here is the example code for the hero -->
+    <div class="hero bg-primary-content min-h-screen">
+        <div class="hero-content text-center">
+            <div class="max-w-lg">
+                <h1 class="text-5xl font-bold">Hello! I am a hero section!</h1>
+                <p class="py-6">
+                    This is a demo of how a hero section works.    
+                    This hero occupies the full height and width of the screen. 
+                </p>
+                <a href="https://daisyui.com/components/hero/" target="_blank" class="btn btn-primary">Hero documentation</a>
+            </div>
+        </div>
+    </div>
+    
+     
+
+</html>
