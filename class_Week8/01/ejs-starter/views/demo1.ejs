@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h2 {
+      border-top:1px solid grey;
+    }
+    img {
+      height:200px;
+    }
+  </style>
+  <!-- <link rel="stylesheet" href="/css/main.css" /> -->
+</head>
+<body>  
+  <h1 class="text-2xl">Demo of using EJS</h1>
+
+  <!-- 1. In ejs your file can have html
+  it is treated like regular html -->
+  <p>Here is p</p>
+  <a href="#">link</a>
+  <ul>
+    <li>List item 1</li>
+    <li>List item 2</li>
+  </ul>
+
+  <!-- 2. Your ejs file can have css
+  If you include css, it will be treated like regular css -->
+  <p class="text-secondary">Here is a p with color</p>
+  <p style="color:gold;">Here is a p with color</p>
+
+
+
+  <h2>Example: Loop</h2>
+  <!-- 3. You can add programming logic to your EJS file -->
+  <!-- 3a. LOOP -->
+  <!-- inside the for loop,
+    put the HTML code that you want repeated -->
+  <% for (let i = 10; i < 13; i++) { %>
+    <div style="border-bottom:1px solid grey;">
+      <h3 style="background-color: goldenrod;">This is an h3</h3>
+      <p>Hello!</p>
+      <a href="http://www.mlb.com">Click here!</a>
+    </div>
+  <% } %>
+
+
+
+  <h2>Example: Condition</h2>
+  <!-- 3b. CONDITION! (if-else)-->
+  <!-- If a condition is true, then output HTML -->
+  <!-- If condition is false, then: don't output HTML (do nothing) or output some different HTML -->
+
+   <% for (let i = 0; i < 5; i++) { %>
+      <p>Hello world!</p>
+     <!-- if i > 3, then output a link -->
+
+     <% if (i >= 2) { %>
+       <a href="#">Here is a link for you to click on!</a>
+     <% } else { %>
+       <p>Here is another p1!</p>
+       <p>Here is another p2!</p>
+       <hr/>
+     <% } %>
+
+ <% } %>
+
+
+  <h2>Example: Output a variable's value</h2>
+  <!-- output the current value of i -->
+ <% for (let i = 100; i <= 255; i+=50) { %>
+    <p>
+      This is a paragraph: <%= i %>
+    </p>
+    <p style="background-color: rgb(255, 0, <%= i %>)"> test</p>
+    <a href="http://www.<%=i%>.com">Click here!</a>
+  <% } %>  
+
+
+  <h2>Example</h2>
+  <!-- Demo of loop, condition, outputting a value -->
+  <% for (let i = 1; i < 20; i++) { %>
+    
+    <% if (i < 10) { %>
+      <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/00<%=i%>.png"/>
+    <% } else if (i >= 10 && i <= 99) { %>
+      <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/0<%=i%>.png"/>
+    <% } %> 
+    
+    <p>#000<%=i%></p>
+    <p>Pokemon name goes here</p>
+  <% } %> 
+
+
+
+
+
+
+
+  <!-- <h1>Customer Favorites under $2500</h1>  
+  <% for (let i = 0; i < items.length; i++) { %>
+    <div>
+      <p>Name: <%= items[i].name %> </p>
+      <p>Price: $<%= items[i].price %></p>
+      <p>Rating: <%= items[i].starRating %><p>
+      <p>sdfsdsdfdsfsd</p>
+    </div>  
+    <hr/>
+  <% } %> -->
+</body>
+</html>
