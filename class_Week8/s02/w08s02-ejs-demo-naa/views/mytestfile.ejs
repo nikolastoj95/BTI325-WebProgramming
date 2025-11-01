@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here is my page</h1>
+    <p>Use the Network > Response tab to view the HTML sent by the server</p>
+    <% for (let i = 0; i < 3; i++) { %>
+        <p>hello <%= i %></p>
+        <a href="/<%= i %>">Click here</a>
+    <% } %>
+</body>
+</html>

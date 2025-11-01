@@ -1,0 +1,67 @@
+<!-- if it sees html, it will just output html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- tailwind css -->
+    <!-- <link rel="stylesheet" href="/css/main.css"/> -->
+</head>
+<body>    
+    <h1>Welcome to my page!</h1>
+    <p>
+        <%= x %>
+    </p>
+    <p>Your dog's name is: <%= y %></p>
+    
+    <p>
+        <%= z[0] %>
+    </p>
+    <p>
+        <%= z[1] %>
+    </p>
+    <p>
+        <%= z[2] %>
+    </p>
+
+    <h1>Students</h1>
+    <p>Student name: <%= a %></p>
+    <p>Student course: <%= b %></p>
+
+
+    <h2>Output a word <%= x %> times</h2>
+
+    <% for (let i = 0; i < x; i++) { %>
+        <p>Hello! </p>
+    <% } %>
+
+    <h2>Output the dog's name, <%= x %>  times</h2>
+     <% for (let i = 0; i < x; i++) { %>
+        <p>Hello! <%= y %></p>
+    <% } %>
+
+
+    <h2>Testing a condition</h2>
+    <% if (y === "Fido") {%>
+        <p>Fido is a dog!</p>
+    <%}  else { %>
+        <p>I don't know what type of animal it is</p>
+    <%} %>
+
+
+    <h2>Testing the students</h2>
+
+    <p>How many students? <%= myList.length %> </p>
+
+    <% for (let i = 0; i < myList.length; i++) { %>
+        <p>Name: <%= myList[i].name %> </p>
+        <p>Course: <%= myList[i].course %> </p>
+        <% if ( myList[i].course === "BSD") { %>
+            <p>This is the best program ever!</p>
+        <% } %>
+        <hr/>
+    <% } %>
+
+</body>
+</html>

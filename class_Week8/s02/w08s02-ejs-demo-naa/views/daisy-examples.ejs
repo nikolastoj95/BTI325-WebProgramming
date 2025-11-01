@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <h1>Component Demo</h1>
+
+    <!-- demo of using a button -->
+    <h2>Button demo</h2>
+
+    <button>Submit data</button>
+    <button class="btn">Test 2</button>
+    <button class="btn btn-info">Test 3</button>
+
+    <!-- the btn class can be applied to any HTML element -->
+
+    <!-- example of applying it to a link -->
+    <a href="#">This is a link</a>    
+    <a href="#" class="btn btn-warning">This is a link 2</a>
+
+    <!-- example of applying it to a p -->
+    <p>This is a p</p>
+    <p class="btn">This is a p</p>
+    <p class="btn btn-accent">This is a p</p>
+
+
+    <h2>Demo of. a card</h2>
+
+
+    <!-- demo of using a card -->
+    <div class="card bg-secondary w-96 shadow-sm">
+        <!-- part 1: image -->
+        <figure>
+            <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+        </figure>
+        <!-- part 2: card content -->
+        <div class="card-body">
+            <h2 class="card-title">Nike Shoes</h2>
+            <p>These are green shoes, you will run very fast in them</p>
+            <!-- part 3: row that contains the button -->
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">
+                    Buy Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- demo of using a chat bubble chat -->
+  
+    <!-- chat-end/chat-start controls the position of the chat bubble -->
+    <div class="chat chat-start">
+        <!-- part 1: profile photo -->
+        <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+                <img  src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp" />
+            </div>
+        </div>
+        <!-- part 2: message to display -->
+        <div class="chat-bubble">
+            It was said that you would, destroy the Sith, not join them.
+        </div>
+    </div>
+
+
+
+    <!-- demo of using EJS to programatically generate chat bubbles components -->
+    <h2>Simulate a chat conversation between two players on the LA Dodgers</h2>
+
+    <% for (let i = 0; i < m.length; i++) { %>
+        <div class="chat chat-start">
+            <!-- part 1: profile photo -->
+            <div class="chat-image avatar">
+                <div class="w-10 rounded-full">
+                    <img  src="<%= m[i].img %>" />
+                </div>
+            </div>
+            <!-- part 2: message to display -->
+            <div class="chat-bubble">
+                <%= m[i].msg %>
+            </div>
+        </div>
+
+    <% } %> 
+
+
+
+</body>
+
+</html>
