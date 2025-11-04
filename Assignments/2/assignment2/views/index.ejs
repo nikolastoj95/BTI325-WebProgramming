@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html data-theme="emerald" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=d%>- Travel Guide</title>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+</head>
+
+<body>
+    <!--Nav bar-->
+    <div class="navbar bg-base-100 shadow-sm">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-lg">Travel Guide</a>
+      </div>
+      <div class="flex-none">
+        <a class="btn btn-ghost text-lg"><%=d %></a>
+      </div>
+    </div>
+    <!--The Title, destination Name, Overlay-->
+  <div class="hero min-h-[50vh]" 
+  style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toronto_skyline%2C_2024_%2852592814618%29.jpg/2560px-Toronto_skyline%2C_2024_%2852592814618%29.jpg);"
+  >
+  <div class="hero-overlay "></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold"><%=d %></h1>
+      <p class="mb-5">
+        A Travel Journal of all Memorable Locations - Food, Landmarks, Parks, Neighbourhoods - all within <%=d  %>
+        
+      </p>
+      <button  class="btn btn-primary" onclick= "scrollDown()">Get Started</button>
+    </div>
+  </div>
+</div>
+<!--End of TItle overlay-->
+
+<div class="card bg-base-100  shadow-xl m-10"> <!--w-auto-->
+  <div class="card-body">
+    <div class="card-title"> All Memorable Locations</div>
+    <!--<p>A card component has a figure, a body part, and inside body there are title and actions parts</p>-->
+    <!--
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">Buy Now</button>
+    </div>
+    -->
+
+    <!--Bottom half , the table-->
+<div class="overflow-x-auto bg-base-100">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Address</th>
+        <th>Comments</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+       <% for (let i =0; i< l.length; i++) { %>
+        <tr>
+          <th>
+              <div class="avatar">
+              <div class="mask mask-squircle h-25 w-25">
+                <img
+                  src="<%= l[i].image  %>"
+                  alt="<%= l[i].name  %>" />
+              </div>
+            </div>
+            
+          </th>
+          <td>
+            <span class="font-bold"><%= l[i].name  %></span></td>
+          <td>
+            <span class="badge badge-outline badge-info"><%= l[i].category  %></span>
+          
+          
+          </td>
+          <td ><%=l[i].address  %> </td>
+          <td class="max-w-[28ch]"><%= l[i].comments  %></td>
+          <td><button class="btn btn-error">Delete</button></td>
+        </tr>
+
+       <% } %>
+       
+     
+      
+      
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+    
+
+
+</body>
+
+</html>
