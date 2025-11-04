@@ -13,6 +13,10 @@ app.get("/",(req,res)=>{
     return res.render("index.ejs",{d: DESTINATION, l:locations});
 })
 
+app.get("/ex",(req,res)=> {
+    return res.render("example.ejs",{d: DESTINATION, l:locations})
+})
+
 const startServer = () => {
     console.log("STARTING Express web server")     
     console.log(`server listening on: http://localhost:${port}`) 
