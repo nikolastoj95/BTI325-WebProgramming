@@ -17,6 +17,14 @@ app.get("/ex",(req,res)=> {
     return res.render("example.ejs",{d: DESTINATION, l:locations})
 })
 
+// to delete a location
+app.get("/locations/delete/:id",(req,res)=>{
+    const locationID = req.params.id;
+    console.log(locationID)
+    console.log(typeof Number(locationID))
+    return res.send("Deleted")
+})
+
 const startServer = () => {
     console.log("STARTING Express web server")     
     console.log(`server listening on: http://localhost:${port}`) 
