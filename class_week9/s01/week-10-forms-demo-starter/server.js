@@ -27,10 +27,30 @@ app.post("/test",(req,res)=>{
 
 // 5 use the req.body to access 
 // req.body gets you everything in payload 
-app.get("/test",(req,res)=> {
+/*app.get("/test",(req,res)=> {
     console.log("Data from form:")
     console.log(req.body)
     return res.send("done!")
+});*/
+// Excercise 1 calulator 
+
+app.get("/ex1Calculator",(req,res)=>{
+    return res.render("calculator.ejs")
+});
+
+//2. endpoint to recive
+//parseFloat(price) *1.13 
+// parseInt
+app.post("/calculate",(req,res)=>{
+    console.log(req.body)
+
+    // getting the price after tax
+
+    // a. getting price
+
+    const price = req.body.textPrice;
+    
+    return res.render("results.ejs")
 });
 
 app.listen(HTTP_PORT, () => { console.log(`server listening on: http://localhost:${HTTP_PORT}`) });
