@@ -67,7 +67,7 @@
                       </div>
                     </div>
                   </td>
-                  
+
                   <td class="font-semibold"><%= loc.name %></td>
                   <td>
                     <span class="badge badge-info badge-outline"><%= loc.category %></span>
@@ -76,7 +76,7 @@
                   <td class="max-w-[28ch]"><%= loc.comments %></td>
                   <td class="text-right">
                     <form action="/locations/<%= loc.id %>/delete" method="POST" onsubmit="return confirm('Delete <%= loc.name %>?')">
-                      <button class="btn btn-error btn-sm">Delete</button>
+                      <button class="btn btn-error btn-sm" >Delete</button>
                     </form>
                   </td>
                 </tr>
