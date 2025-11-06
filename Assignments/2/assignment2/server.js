@@ -19,10 +19,22 @@ app.get("/ex",(req,res)=> {
 
 // to delete a location
 app.get("/locations/delete/:id",(req,res)=>{
-    const locationID = req.params.id;
+    const locationID = parseInt(req.params.id);
     console.log(locationID)
-    console.log(typeof Number(locationID))
-    return res.send("Deleted")
+    
+    for (let i = 0; i < locations.length; i++){
+        if (locationID === locations[i].id) {
+            // when location if found and matchs given one remove from data
+            // leave loop after
+            
+            locations.splice(i,1); 
+            break;
+        };
+    };
+    // delete happened
+    console.log(`id ${locationID} is deleted`);
+    // redirect to home page again
+    return res.redirect('/')
 })
 
 const startServer = () => {
