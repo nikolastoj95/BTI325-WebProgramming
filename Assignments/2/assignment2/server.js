@@ -13,10 +13,6 @@ app.get("/",(req,res)=>{
     return res.render("index.ejs",{d: DESTINATION, l:locations});
 })
 
-app.get("/ex",(req,res)=> {
-    return res.render("example.ejs",{d: DESTINATION, l:locations})
-})
-
 // to delete a location
 app.post("/locations/delete/:id",(req,res)=>{
     const locationID = parseInt(req.params.id);
