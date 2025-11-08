@@ -18,7 +18,7 @@ app.get("/ex",(req,res)=> {
 })
 
 // to delete a location
-app.get("/locations/delete/:id",(req,res)=>{
+app.post("/locations/delete/:id",(req,res)=>{
     const locationID = parseInt(req.params.id);
     console.log(locationID)
     
@@ -31,6 +31,7 @@ app.get("/locations/delete/:id",(req,res)=>{
             break;
         };
     };
+   
     // delete happened
     console.log(`id ${locationID} is deleted`);
     // redirect to home page again
