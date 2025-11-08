@@ -1,4 +1,4 @@
-const DESTINATION = "Toronto";
+const DESTINATION = "Toronto, Ontario";
 
 locations = [
   {
