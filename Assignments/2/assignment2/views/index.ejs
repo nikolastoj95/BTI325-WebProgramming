@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="emerald" lang="en" class="scroll-smooth">
+<html data-theme="corporate" lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -87,7 +87,9 @@
             <%= l[i].comments  %>
           </td>
           <td>
-            <a href="locations/delete/<%=l[i].id %>" class="btn btn-error" onclick="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!') " >Delete</a>
+            <form method="POST" action="locations/delete/<%=l[i].id %>" onsubmit="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!') ">
+              <button class="btn btn-error" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
 
