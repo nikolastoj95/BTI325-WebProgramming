@@ -4,16 +4,19 @@ const port = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 
-const {DESTINATION, locations} = require("./modules/data.js")
+const {DESTINATION, locations} = require("./modules/data.js");
 
-// needed for EJS
+// needed for EJS templates
 app.set("view engine", "ejs"); 
 
+//HOME Layout, the destination and locations
+//GET
 app.get("/",(req,res)=>{
     return res.render("index.ejs",{d: DESTINATION, l:locations});
 })
 
-// to delete a location
+// To delete a location
+//POST
 app.post("/locations/delete/:id",(req,res)=>{
     const locationID = parseInt(req.params.id);
     console.log(locationID)
