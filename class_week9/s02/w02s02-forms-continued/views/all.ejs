@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="/css/main.css"/> -->
+     <style>
+        div { border-bottom:1px solid grey;}
+     </style>
+</head>
+<body>        
+    <h1>Students</h1>
+    
+    <% for (let i = 0; i < myStudents.length; i++) { %>
+        <div>
+            <p>Name: <%= myStudents[i].name %></p>
+            <p>Grade: <%= myStudents[i].grade %></p>
+            <!-- <a href="/increase/<%= myStudents[i].name %>">Increase grade by 10</a> -->
+
+            <form method="POST" action="/update/<%= myStudents[i].id %>">
+                <label>How much should the grade increase?</label>
+                <input type="text" name="txtAmount"/>
+                <button>Increase Grade</button>
+            </form>
+
+        </div>        
+    <% } %>
+</body>
+</html>
