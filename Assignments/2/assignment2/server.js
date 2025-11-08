@@ -34,7 +34,7 @@ app.get("/locations/delete/:id",(req,res)=>{
     // delete happened
     console.log(`id ${locationID} is deleted`);
     // redirect to home page again
-    return res.redirect('/')
+    return res.redirect('/');
 })
 
 const startServer = () => {
