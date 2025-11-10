@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"/> -->
+    <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
     <h1>Price Calulator</h1>
     <form method="POST" action="/calculate">
+        <label>Product Name:</label>
         <input type="text" placeholder="Enter Product Name" name="txtPName" />
-        <input type="text" placeholder="Enter Price" name="textPrice" />
-        <button>Submit</button>
+        <label>Product Price:</label>
+        <input type="text" placeholder="Enter Price" name="price" />
+        <button>Calculate</button>
     </form>
 </body>
 </html>
