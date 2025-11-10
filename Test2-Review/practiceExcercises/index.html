@@ -1,0 +1,71 @@
+<!DOCTYPE html >
+<html lang="en" data-theme="cupcake">
+
+<head>
+    <meta charset= "UTF-8">
+
+    
+    <title>Document</title>
+    <!--<link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    />-->
+    <link rel="stylesheet" href="/css/main.css" />
+  
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+    <h1>Menu</h1>
+    <div class=" m-8 p-3 border-4 border flex flex-row justify-center">
+        <div >
+            <!--<p class="text-sm font-bold">Hello world (text-sm)</p>
+            <p class ="text-base">Hello world (default text size)</p>-->
+            <p class ="text-7xl font-bold italic underline"> Hello world</p>
+        </div>
+    </div>
+    <p class=" m-8 p-3 border-4 border flex flex-row justify-center text-black font-bold">Celeste's Test Scores Greater Than 60</p>
+    <div id="score-container" class=" m-8 p-3 border-4 border flex flex-row justify-center">
+        
+        <p class="text-gray-500 italic">Loading Scores....</p>
+    </div>
+    <script>
+
+        fetch("/scores")
+            .then(res => res.json())
+            .then(data => { 
+                 const container = document.getElementById("score-container");
+
+                 if (data.length === 0) {
+                    container.innerHTML = "<p class='text-red-500'>No scores found.</p>";
+                    return;
+                }
+                  container.innerHTML = data
+
+                    
+                  .map ((score) => `
+                  <div class="p-2  text-center">
+                   <p>  ${score}</p> 
+                  </div>
+                  `)
+                  .join("");
+            });
+    </script>
+
+
+
+
+  
+</body>
+</html>
