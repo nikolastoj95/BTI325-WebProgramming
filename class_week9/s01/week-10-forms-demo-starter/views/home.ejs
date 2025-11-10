@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="/css/main.css"/> -->
+    <!--<link rel="stylesheet" href="/css/main.css"/> -->
 </head>
 <body>
     <h1>Forms Demo</h1>
     <form method="POST" action="/test">
         <input type="text" placeholder="Enter name" name="txtName"/> <!--has to have name for post end point to work to save in payload-->
-        <input type="text" placeholder="Enter age" type="number" name="txtAge"/>
+        <input type="number" placeholder="Enter age" type="number" name="age"/>
+         <label>Tell me about yourself!</label>
+         <label>Which airport is closest to you?</label>
+        <select name="airport">
+            <option value="YYZ">Toronto Airport</option>
+            <option value="JFK">New York City</option>
+            <option value="CDG">Paris Airport</option>
+            <option value="SIN">Singapore Airport</option> 
+        </select>
         <!--<input type="text" placeholder="Enter email" type="email" name="Email"/>-->
         <button>Click Me</button>
         
         <!--<label>Tell me about yourself!</label>-->
-         <label>Which airport is closest to you?</label>
+         <!--label>Which airport is closest to you?</label>
             <select>
             <option value="YYZ">Toronto Airport</option>
             <option value="JFK">New York City</option>
             <option value="CDG">Paris Airport</option>
             <option value="SIN">Singapore Airport</option>
-        </select>
+        </select>-->
         <textarea>
 
         </textarea>
