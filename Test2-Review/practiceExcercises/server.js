@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT|| 8080
 
+const path = require("path");
+app.use(express.static("public"));
+
 const scores = [45, 80, 32, 90, 60];
 const items = [100,200,300]
 const expenses = [50, 75, 100, 25];
@@ -18,19 +21,16 @@ app.get('/param/:type', (req,res)=> {
 // given scores array, create new array of scores greater than or equal to 60
 
 app.get("/scores", (req,res) => {
-
     const results = scores
                 .filter((score) => score >= 60 )
-
     const gre_eq_60 = scores
             .filter((score) => {
             if (score >= 60 ) {
                 return true
             } 
     });
-    console.log( gre_eq_60);
+    console.log(gre_eq_60);
     console.log(results)
-
 
 
     return res.send(results)
@@ -81,6 +81,10 @@ app.get("/reduce",(req,res) => {
 
 })
 //ex5 TailWind
+
+app.get('/tailwind',(req,res) =>{
+    return res.sendFile(path.join(__dirname,"index.html"))
+});
 
 
 const startServer = () => {
