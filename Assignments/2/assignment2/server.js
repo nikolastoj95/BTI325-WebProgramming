@@ -25,20 +25,19 @@ app.post("/locations/delete/:id",(req,res)=>{
         if (locationID === locations[i].id) {
             // when location if found and matchs given one remove from data
             // leave loop after
-            
             locations.splice(i,1); 
             break;
         };
     };
    
-    // delete happened
+    //delete happened
     console.log(`id ${locationID} is deleted`);
     // redirect to home page again
     return res.redirect('/');
-})
+});
 
 const startServer = () => {
     console.log("STARTING Express web server")     
     console.log(`server listening on: http://localhost:${port}`) 
-}
-app.listen(port, startServer)
+};
+app.listen(port, startServer);
