@@ -43,7 +43,7 @@
     <!-- head -->
     <thead>
       <tr>
-        <th>Image</th>
+        <th></th>
         <th>Name</th>
         <th>Category</th>
         <th>Address</th>
@@ -57,7 +57,7 @@
         <tr>
           <th>
               <div class="avatar">
-                <div class="mask mask-squircle h-25 w-25">
+                <div class="mask mask-squircle h-40 w-40">
                   <img
                     src="<%= l[i].image  %>"
                     alt="<%= l[i].name  %>" 
@@ -78,13 +78,20 @@
             <%= l[i].comments  %>
           </td>
           <td>
-            <form method="POST" action="locations/delete/<%=l[i].id %>" onsubmit="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!') ">
+            <!--
+            the form when it is submited it asks via alert to the user if you want to delete
+             if it is not confirmed return false do not do anything
+            else it is true it was confirmed , show alert Deleted
+            -->
+            <form method="POST" action="locations/delete/<%=l[i].id %>"
+                  onsubmit="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!') ">
               <button class="btn btn-error" type="submit">Delete</button>
             </form>
           </td>
         </tr>
 
        <% } %>
+       <!--Checks if there is any data to show, if the length is 0, no data it says a message-->
        <% if (l.length === 0) {%>
        <tr>
           <td colspan="6" class="text-center text-base-content/60 py-10"> No Memorable Locations!</td>
