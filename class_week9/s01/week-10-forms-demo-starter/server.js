@@ -8,7 +8,7 @@ app.set("view engine", "ejs");      //ejs
 // forms: process data received in a req.body
 // need this for req.body
 app.use(express.urlencoded({ extended: true }));    
-
+//displays the form
 app.get("/", (req, res) => {    
     return res.render("home.ejs")
 })
@@ -16,29 +16,44 @@ app.get("/", (req, res) => {
 // TODO: Make a POST endpoint
 
 app.post("/test",(req,res)=>{
-    console.log("Debug: Activing /test end point")
+    const airportinput = req.body.airport;
+    const name = req.body.txtName;
+    const age = req.body.age;
+    console.log("Debug: Activating /test endpoint")
+
     //get payload data
-    console.log("DEBUG. payload DATA from the form")
+    console.log("DEBUG. Payload DATA from the form")
     console.log(req.body)
-    return res.send("Success! Done")
+    // JS object: req.body = {txtName: Nikola,  txtAge:90}
+
+    // you can access the individual form fields using JS syntax
+    console.log(`Name: ${req.body.txtName}`)
+    console.log(`Age: ${req.body.age}`)
+    console.log(`Airport ${req.body.airport}`)
+    console.log(airportinput + ' ' + name + ' ' + age  )
+
+    if (airportinput === 'YYZ') {
+        return res.send(`Domestic! Done!`)
+    } else {
+        return res.send(`International! Done!`)
+    }
+    //return res.send("Success! Done")
 })
 
 
 
 // 5 use the req.body to access 
 // req.body gets you everything in payload 
-/*app.get("/test",(req,res)=> {
-    console.log("Data from form:")
-    console.log(req.body)
-    return res.send("done!")
-});*/
-// Excercise 1 calulator 
 
+//6.Done
+
+// Excercise 1 calulator 
+// render the form itself
 app.get("/ex1Calculator",(req,res)=>{
     return res.render("calculator.ejs")
 });
 
-//2. endpoint to recive
+//2. endpoint to recive data from /ex1Calculator form
 //parseFloat(price) *1.13 
 // parseInt
 app.post("/calculate",(req,res)=>{
@@ -47,10 +62,13 @@ app.post("/calculate",(req,res)=>{
     // getting the price after tax
 
     // a. getting price
+    const pName = req.body.txtPName
+    const price = parseFloat(req.body.price);
+    console.log( typeof pName)
+    console.log( typeof price)
 
-    const price = req.body.textPrice;
-    
-    return res.render("results.ejs")
+    const price_aftTax = (price * 1.13).toFixed(2);
+    return res.render("results.ejs",{x: pName, y: price_aftTax})
 });
 
 app.listen(HTTP_PORT, () => { console.log(`server listening on: http://localhost:${HTTP_PORT}`) });
