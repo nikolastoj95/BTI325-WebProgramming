@@ -8,7 +8,7 @@ locations = [
     address: "290 Bremner Blvd, Toronto, ON M5V 3L9",
     comments: "Really fun, resturant up there was great, had a great time! The glass floor was great",
     image:
-      "https://media.gettyimages.com/id/458613409/photo/cn-tower-toronto-ontario-canada.jpg?s=612x612&w=gi&k=20&c=NhXUowD2b4h3H2C0Yi_QyFX1aO9TGvFcHbKYU_2tanQ=",
+      "https://blogto-production2-baselayer-display.blogto.com/articles/2020624-cn-tower-toronto-2.jpg",
   },
   {
     id: 2,
