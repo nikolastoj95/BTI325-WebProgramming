@@ -24,8 +24,19 @@ const mongoose = require('mongoose')
 // +++  3. Specify your database connection information
 // see startServer() function at the bottom of this file
 
-// +++  4. TODO: Define your database table 
+// +++  4. TODO: Define your database table // 9.23am
+
 // 4a. Schema
+const employeeSchema = new mongoose.Schema({
+   name:String,
+   isManager:Boolean,
+   hourlyRate:Number
+})
+// create a collection in Mongo called “empployees”
+// every document in that collection will follow the employSchema
+const Employee = new mongoose.model("employees", employeeSchema)
+//// "employees" has to match the collection in mongo altas
+
 
 // 4b. Model
 
@@ -39,8 +50,12 @@ app.get("/", (req, res) => {
 
 // Endpoints
 // Insert
-app.get("/employees/insert", (req,res) => {
+// if have await in line, needs asynb in endpoint name def
+app.get("/employees/insert", async (req,res) => {
+    
     console.log("TODO: Inserting....")
+    await Employee.create({name:"Jane", isManager:true, hourlyRate:32.50})
+    await Employee.create({name:"Sam", isManager:false, hourlyRate:19.00})
     return res.redirect("/")
 })
 // Update
@@ -74,6 +89,7 @@ async function startServer() {
 
         // +++ 5a. Attempt to connnect to the database using the database connection information you defined in step #2
         await mongoose.connect(process.env.MONGODB_URI)
+        // process.env.MONGODB_URI refers to that .env file to that MONGODB_URI varable 
 
         // +++ 5b. If tables do not exist in the db, then Mongo will automatically create them
 
