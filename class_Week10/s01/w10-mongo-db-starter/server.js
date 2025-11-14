@@ -1,5 +1,6 @@
 const HTTP_PORT = process.env.PORT || 8080;
 
+const { name } = require("ejs");
 const express = require("express");
 const app = express();
 app.use(express.static("public"));  // css files
@@ -54,18 +55,22 @@ app.get("/", (req, res) => {
 app.get("/employees/insert", async (req,res) => {
     
     console.log("TODO: Inserting....")
-    await Employee.create({name:"Jane", isManager:true, hourlyRate:32.50})
-    await Employee.create({name:"Sam", isManager:false, hourlyRate:19.00})
+    await Employee.create({name:"Celeste", isManager:false, hourlyRate:17.00})
+    await Employee.create({name:"Lily", isManager:false, hourlyRate:17.00})
     return res.redirect("/")
 })
 // Update
-app.get("/employees/update", (req,res) => {
+app.get("/employees/update", async (req,res) => {
     console.log("TODO: Update....")
+    await Employee.findByIdAndUpdate("6916a3654f60bf1ec2614e8e",{name: 'Nikola', hourlyRate: 26.60}, {new:true}) 
     return res.redirect("/")
 })
 // Delete
-app.get("/employees/delete", (req,res) => {
+app.get("/employees/delete",  async (req,res) => {
     console.log("TODO: Delete....")
+    await Employee.findByIdAndDelete("6916a3392c1011e41eb8848b")
+    await Employee.findByIdAndDelete("691499952297434a00a510fb")
+    await Employee.findByIdAndDelete("6916a3392c1011e41eb8848d")
     return res.redirect("/")  
 })
 // Read Examples
