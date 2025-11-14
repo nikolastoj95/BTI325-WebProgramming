@@ -76,10 +76,8 @@
              if it is not confirmed return false do not do anything
             else it is true it was confirmed , show alert Deleted
             -->
-            <form method="POST" action="locations/delete/<%=l[i].id %>"
-                  onsubmit="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!') ">
-              <button class="btn btn-error" type="submit">Delete</button>
-            </form>
+            <a href="locations/delete/<%=l[i].id %>" class="btn btn-error" 
+              onclick="if (!confirm('Delete <%=l[i].name %>?')) return false; alert ('Deleted!')" >Delete</a>
           </td>
         </tr>
 
