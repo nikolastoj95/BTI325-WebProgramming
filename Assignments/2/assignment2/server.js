@@ -17,7 +17,7 @@ app.get("/",(req,res)=>{
 
 // To delete a location
 //POST
-app.post("/locations/delete/:id",(req,res)=>{
+app.get("/locations/delete/:id",(req,res)=>{
     const locationID = parseInt(req.params.id);
     console.log(locationID)
     
