@@ -53,7 +53,6 @@ app.get("/", (req, res) => {
 // Insert
 // if have await in line, needs asynb in endpoint name def
 app.get("/employees/insert", async (req,res) => {
-    
     console.log("TODO: Inserting....")
     await Employee.create({name:"Celeste", isManager:false, hourlyRate:17.00})
     await Employee.create({name:"Lily", isManager:false, hourlyRate:17.00})
@@ -75,7 +74,7 @@ app.get("/employees/delete",  async (req,res) => {
 })
 // Read Examples
 app.get("/employees", (req,res) => {
-    console.log("TODO: Getting all employees....")    
+    console.log("TODO: Getting all employees....")   
     return res.redirect("employees.ejs")
 })
 app.get("/employees/wage/16.60", (req,res) => {
