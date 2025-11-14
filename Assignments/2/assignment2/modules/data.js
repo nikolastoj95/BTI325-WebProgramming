@@ -1,6 +1,6 @@
 const DESTINATION = "Toronto, Ontario";
 
-locations = [
+loc = [
   {
     id: 1,
     name: "CN Tower",
@@ -72,4 +72,4 @@ locations = [
   }
 ];
 
-module.exports = {locations,DESTINATION};
+module.exports = {loc,DESTINATION};
