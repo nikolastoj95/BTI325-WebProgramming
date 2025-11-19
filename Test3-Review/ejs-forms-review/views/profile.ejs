@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="/css/main.css"/> -->
+
+</head>
+<body>
+    <h1>Hello, This is a EJS Template</h1>
+    <p>This is <%=username  %></p>
+
+    <div>
+        <h2>List of Items</h2>
+        <% for (let i =0 ; i< items.length; i++ ) { %>
+            <ul>
+                
+                <li>
+                    <%= items[i] %>
+
+                </li>
+            </ul>
+
+       <% } %>
+
+       <form action="/create-user" method="POST">
+            <label>Username</label>
+            <input type="text" name="txtName" />
+            <label>Age</label>
+            <input type="text" name="txtAge" />
+
+        <button type="submit">Submit</button>
+
+
+       </form>
+
+        <form action="/cost" method="POST">
+            <label>Enter Months</label>
+            <input type="text" name="txtMonth" />
+            <select name="txtType">
+                <option value="none">None</option>
+                <option value="p">Premium</option>
+
+            </select>
+           
+
+        <button type="submit">Submit</button>
+
+
+       </form>
+
+
+
+    </div>
+   
+</body>
+</html>
