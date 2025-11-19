@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="retro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+      <!-- <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width:200px ;
+        }
+     </style> -->
+    </head>
+<body>
+     <!--add.ejs lecture example-->
+    <!-- <h1></h1> -->
+
+    <div class="m-10 card-border bg-base-300 w-96 justify-center">
+        <div class="card-body">
+            <h2 class="card-title flex flex-col ">Add an Employee</h2>
+            <form method="POST" action="/insert">
+                <label class="m-2 flex flex-col justify-between floating-label">
+                    <span class="font-bold">Enter Name</span>
+                    <input type="text" ptype="text" name="txtName" class="input input-sm bg-base-100" />
+                    
+                </label>
+                <label class=" m-2 flex flex-col justify-between floating-label">
+                    <span class="font-bold" >Enter Hourly Wage</span>
+                    <input type="text" name="txthourRate" class="input input-sm bg-base-100" />
+                    
+                </label>
+                <label class="m-2 flex flex-col justify-between  floating-label">
+                    <span class="font-bold"> Is Manager?</span>
+                    <input type="checkbox" name="txtIsManager"  checked="checked" class="checkbox bg-base-100" />
+                    
+                </label>
+                
+                
+                <div>
+                     <!--value="Yes"----->
+                </div>
+            
+                <!-- <button>Insert</button> -->
+                 <div class="card-actions justify-end">
+                <button  type="submit" class="btn btn-primary flex flex-col">Insert</button>
+            </div>
+            </form>
+
+
+
+
+
+            <!-- <p>A card component has a figure, a body part, and inside body there are title and actions parts</p> -->
+            
+        </div>
+    </div>
+
+    
+</body>
+</html>
