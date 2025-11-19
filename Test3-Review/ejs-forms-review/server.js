@@ -1,7 +1,6 @@
-const express = require('express');
 const app = express();
+const express = require('express');
 const port = process.env.PORT || 8080;
-
 // for ejs
 app.set("view engine", "ejs");
 
@@ -11,7 +10,8 @@ app.get("/", (req,res)=>{
 })
 
 const startServer = () =>{
+     console.log(`Press Contorl + C to exit`)
     console.log(`Server Running on http://localhost:${port}`)
-    console.log(`Press Contorl + C to exit`)
+   
 };
 app.listen(startServer, port);
