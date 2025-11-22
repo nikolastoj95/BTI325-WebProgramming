@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employees List</h1>
+    <a href="/">Home</a>
+
+    <a href="/employees/insert">Add Employee</a>
+    
+    <% if (empList.length === 0) {%>
+        <p>There are no employees!</p>
+    <% } else { %>
+
+        <!-- loop through the list and dipslay  -->
+        <% for (let i = 0; i < empList.length; i++) { %>
+            <div style="border-bottom:1px solid grey;">
+                <p>Name: <%= empList[i].name %></p>
+                <p>Rate: <%= empList[i].hourlyRate %></p>
+
+                <% if (empList[i].isManager === true) { %>
+                    <p>This person is a manager!</p>
+                <% } %> 
+            </div>
+            
+        <% } %>
+
+
+    <% }  %>
+</body>
+</html>
