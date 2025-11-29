@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+</head>
+<body>
+    <h1>Create an Account</h1>
+    <!-- user signup form -->
+    <form method="POST" action="/create-account">
+        <Label>Enter email</Label>
+        <input type="text" name="txtEmail"/>
+        <label>Enter password</label>
+        <input type="text" name="txtPassword"/>
+        <label>What is your user type</label>
+        <select name="selUserType">    
+            <option value="student">Student user</option>
+            <option value="prof">Professor user</option>
+            <option value="admin">Admin user</option>
+        </select>
+        <button>Create Account</button>
+    </form>
+
+    <!-- user login form -->
+    <h1>Login to Account</h1>
+    <form method="POST" action="/login">
+        <Label>Enter email</Label>
+        <input type="text" name="txtEmail"/>
+        <label>Enter password</label>
+        <input type="text" name="txtPassword"/>
+        <button>Login</button>
+    </form>
+</body>
+</html>
