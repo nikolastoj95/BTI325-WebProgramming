@@ -21,14 +21,18 @@
         </div>
 
         <!-- main content -->
+         <% if (loggedIn) { %>
+               <p><%= session %> Is Logged IN</p> 
+
+            <% }  %>
         <div class="grid grid-cols-3 gap-4 mt-6">        
-            <% for (let i = 0; i < 3; i++) { %>
+            <% for (let i = 0; i < car.length; i++) { %>
             <div class="card bg-base-100 w-96 shadow-xl card-bordered">
                 <figure>
-                    <img src="https://fastly.clutch.ca/e91e8596-e17c-46ab-84df-cdf27422fb0b.jpg"/>
+                    <img src="<%=car[i].imageUrl%>"/>
                 </figure>
                 <div class="card-body">
-                    <h2 class="card-title">Honda Civic</h2>
+                    <h2 class="card-title"><%= car[i].model%> </h2>
                     <p>Click the button to book this car</p>
                     <div class="card-actions justify-end">
                         <a href="/book" class="btn btn-primary">Book</a>
