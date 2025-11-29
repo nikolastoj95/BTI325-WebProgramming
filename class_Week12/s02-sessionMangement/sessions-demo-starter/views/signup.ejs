@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <style>       
+    </style>
+</head>
+<body class="p-5">
+    <h1 class="text-2xl">Signup!</h1>
+    <div class="w-1/2 my-5">
+        <form method="POST" action="/submit" class="flex flex-col gap-2">
+            <label>What is your username?</label>
+            <input name="txtUsername" type="text" placeholder="Enter username" class="input border border-neutral"/>
+            
+            <label>Choose your plan</label>
+            <select name="selPlanType" class="select border border-neutral">
+                <option disabled selected>Choose a plan</option>
+                <option value="free">Free plan - $0/ mth</option>
+                <option value="paid">Paid plan - $200/mth</option>
+            </select>
+        
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+   
+    <a href="/page2" class="link link-info">Go to page 2</a>
+</body>
+</html>
