@@ -51,22 +51,27 @@ app.post("/login", async (req, res)=>{
 
     //console.log(eMail + ' and ' + password)
     //1. search DB for entered info in users collection Find user by email
-    const user = await User.findOne({
+    let user = await User.findOne({
         email: req.body.email
     })
     
     // 2.  If email not found -> create User
     if (!user) {
-        await User.insertOne({
+        user = await User.create({
             email: req.body.email,
             password: req.body.password
         })  
-    }
-    //3. If email found but password wrong -> error
-    if (user.password !== req.body.password){
+        //new user is auto logged in below
+    } else {
+        //3. If email found but password wrong -> error stay on login
+        if (user.password !== req.body.password){
         //alert('ERROR! Wrong username or password!')
         return res.redirect("/")
     }
+
+    }
+    
+    
 
     //4. Email + password match -> success
 
@@ -74,7 +79,8 @@ app.post("/login", async (req, res)=>{
     console.log(req.session)
     
     req.session.userInfo = {
-        email: req.body.email
+        _id: user._id.toString(),
+        email: user.email
     }
      console.log(req.session.userInfo.email)
      
@@ -115,42 +121,50 @@ app.get("/cars", async (req, res) => {
         return res.redirect("/")
     } else {
         loggedIn = true
+        const userSession = req.session.userInfo
         const session = req.session.userInfo.email
-        console.log(session)
-        const cars =  await Car.find({})
-        return res.render("cars.ejs", {car:cars, loggedIn, session })
+        console.log(userSession)
+        const cars =  await Car.find({}).populate('rentedBy')
+        return res.render("cars.ejs", {car:cars, loggedIn, user: userSession, session })
     }
 });
-app.get("/book", async (req,res)=>{
-
+app.get("/book/:carid", async (req,res)=>{
     let loggedIn = false
-
     if(req.session.userInfo === undefined) {
         loggedIn = false
         return res.redirect("/")
     } else {
+
         loggedIn= true
-        const session = req.session.userInfo.email
-        return res.render("bookingForm.ejs")
-
-    }
-
-
-
-    
+        //const session = req.session.userInfo.email
+        const carId = req.params.carid;
+        console.log(carId)
+        const car = await Car.findById(carId)
+        console.log(car)
+        return res.render("bookingForm.ejs",{car})
+    }  
 })
-app.post("/book", async (req,res)=>{
+app.post("/book/:carid", async (req,res)=>{
     // get booking form data 
     console.log(req.body)
     console.log(req.body.date)
-    const currUser = await User.findOne({
-        email: req.session.userInfo.email
-    })
-    console.log(currUser.email)
+    const carID = req.params.carid
+    const date = req.body.date
 
+    //the current user from session
+    const currUser = req.session.userInfo
+    console.log(currUser.email + ' and ' +  currUser._id)
 
+    //update the cars rended by and return date
+    await Car.updateOne(
+        { _id:carID },
+        {$set: {rentedBy: currUser._id, returnDate: date}}
+        
+    )
     return res.redirect("/cars")
 })
+
+app.post("/car/:carid/return")
 
 const prepopulateDB =  async () => {
     const count = await Car.countDocuments()
@@ -194,11 +208,6 @@ const prepopulateDB =  async () => {
             }
             
         ])
-
-        
-            
-        
-
         console.log("DEBUG: populated cars collection ");
     } else {
         console.log("DEBUG: Cars collection contains documents, cars skipping ");
