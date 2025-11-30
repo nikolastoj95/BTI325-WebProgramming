@@ -164,7 +164,20 @@ app.post("/book/:carid", async (req,res)=>{
     return res.redirect("/cars")
 })
 
-app.post("/car/:carid/return")
+app.post("/car/:carid/return", async(req,res)=> {
+    const carID = req.params.carid;
+    const currUser = req.session.userInfo
+
+    await Car.updateOne (
+        {_id:carID },
+        {$unset: {rentedBy: null, returnDate: ''}}
+
+    )
+    return res.redirect("/cars")
+
+
+
+})
 
 const prepopulateDB =  async () => {
     const count = await Car.countDocuments()
