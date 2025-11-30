@@ -22,7 +22,7 @@
 
         <!-- main content -->
          <% if (loggedIn) { %>
-               <p><%= session %> Is Logged IN</p> 
+               <p>Hello, <%= session %></p> 
 
             <% }  %>
         <div class="grid grid-cols-3 gap-4 mt-6">        
@@ -33,9 +33,32 @@
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title"><%= car[i].model%> </h2>
+
+                    <% if (!car[i].rentedBy)  { %>
+                        <!--Not Rented-->
+                        <a href="/book/<%= car[i]._id %>" class="btn btn-primary">Book</a>
+                    <% } else if ( car[i].rentedBy._id.toString() === user._id.toString()) { %>
+                        <!-- Rented by current user -->
+                         <p>Return Date: <strong><%= car[i].returnDate  %></strong></p>
+                         <form action="/cars/<%= car[i]._id %>/return" method="POST">
+                            <button class="btn btn-secondary" type="submit">Return</button>
+
+                         </form>
+
+
+                        <% } else {%>
+                            <!-- Rented by someone else -->
+                             <p class="mt-2 text-red-500">
+                                 Unavailable until <strong><%= car[i].returnDate %></strong>
+                            </p>
+
+
+
+                            <% }  %>
+
                     <p>Click the button to book this car</p>
                     <div class="card-actions justify-end">
-                        <a href="/book" class="btn btn-primary">Book</a>
+                        
                     </div>
                 </div>
             </div>
