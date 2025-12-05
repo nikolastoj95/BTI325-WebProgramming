@@ -2,8 +2,11 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 const express = require("express");
 const app = express();
-app.use(express.static("public"));  // css files
+//app.use(express.static("public"));  // css files , for deployment vercel remove this
+app.use(express.static(__dirname + '/public')) // use this // css
+
 app.set("view engine", "ejs");      //ejs
+app.set('views', __dirname + '/views') // ejs for vercel deployment
 app.use(express.urlencoded({ extended: true })); //forms
 
 require("dotenv").config()   
