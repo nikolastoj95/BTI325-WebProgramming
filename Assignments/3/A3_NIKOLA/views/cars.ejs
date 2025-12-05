@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="winter">
 
 <head>
     <meta charset="UTF-8">
@@ -22,8 +22,13 @@
 
         <!-- main content -->
          <% if (loggedIn) { %>
-               <p>Hello, <%= session %></p> 
-            <% }  %>
+           
+       
+            <p class="btn btn-ghost text-xl">Hello, <%= session %></p>
+            <!-- <div class="badge badge-neutral badge-dash">Dash</div> -->
+       
+       
+         <% }  %>
         <div class="grid grid-cols-3 gap-4 mt-6">        
             <% for (let i = 0; i < car.length; i++) { %>
             <div class="card bg-base-100 w-96 shadow-xl card-bordered">
