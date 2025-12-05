@@ -3,6 +3,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 const express = require("express");
 const app = express();
 app.set("view engine", "ejs");      //ejs
+app.set('views', __dirname + '/views')// ejs vercel
 app.use(express.urlencoded({ extended: true })); //forms
 
 // setup sessions
@@ -17,7 +18,7 @@ require("dotenv").config()
 const mongoose = require('mongoose')
 
 // TODO: update this section with Vercel specific deployment code
-app.use(express.static("public"));  // css files
+app.use(express.static(__dirname + '/public'));  // css files
 
 
 
@@ -114,8 +115,6 @@ app.get("/logout", async (req,res) => {
 })
 app.get("/cars", async (req, res) => {  
     let loggedIn = false
-    
-
     if (req.session.userInfo === undefined ) {
         loggedIn = false
         return res.redirect("/")
@@ -164,9 +163,9 @@ app.post("/book/:carid", async (req,res)=>{
     return res.redirect("/cars")
 })
 
-app.post("/car/:carid/return", async(req,res)=> {
+app.get("/car/:carid/return", async(req,res)=> {
     const carID = req.params.carid;
-    const currUser = req.session.userInfo
+    //const currUser = req.session.userInfo
 
     await Car.updateOne (
         {_id:carID },
