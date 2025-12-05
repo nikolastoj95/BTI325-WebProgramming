@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <div class="container mx-auto">        
+        <!-- menu -->
+        <div class="navbar bg-base-100 my-6">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="/cars">Rent a Car</a>
+            </div>
+            <div class="flex-none">
+                <a class="btn btn-neutral" href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <!-- main content -->
+         <% if (loggedIn) { %>
+               <p>Hello, <%= session %></p> 
+            <% }  %>
+        <div class="grid grid-cols-3 gap-4 mt-6">        
+            <% for (let i = 0; i < car.length; i++) { %>
+            <div class="card bg-base-100 w-96 shadow-xl card-bordered">
+                <figure>
+                    <img src="<%=car[i].imageUrl%>"/>
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title"><%= car[i].model%> </h2>
+
+                    <% if (!car[i].rentedBy)  { %>
+                        <!--Not Rented-->
+                        <a href="/book/<%= car[i]._id %>" class="btn btn-primary">Book</a>
+                    <% } else if ( car[i].rentedBy._id.toString() === user._id.toString()) { %>
+                        <!-- Rented by current user -->
+                         <p>Return Date: <strong><%= car[i].returnDate  %></strong></p>
+                         <a href="/car/<%= car[i]._id %>/return" class="btn btn-secondary"> Return</a>
+                         <!-- <form action="/car/<%= car[i]._id %>/return" method="POST">
+                            <button class="btn btn-secondary" type="submit">Return</button>
+
+                         </form> -->
+
+
+                        <% } else {%>
+                            <!-- Rented by someone else -->
+                             <p class="mt-2 text-red-500">
+                                 Unavailable until <strong><%= car[i].returnDate %></strong>
+                            </p>
+                            <% }  %>
+                    <div class="card-actions justify-end">
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
