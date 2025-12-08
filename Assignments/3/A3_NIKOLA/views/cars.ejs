@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="lemonade">
+<html lang="en" data-theme="emerald">
 
 <head>
     <meta charset="UTF-8">
@@ -26,12 +26,10 @@
        
             <p class="btn btn-ghost text-xl">Hello, <%= session %></p>
             <!-- <div class="badge badge-neutral badge-dash">Dash</div> -->
-       
-       
          <% }  %>
         <div class="grid grid-cols-3 gap-4 mt-6">        
             <% for (let i = 0; i < car.length; i++) { %>
-            <div class="card bg-base-100 w-96 shadow-xl card-bordered">
+            <div class="card bg-base-250 w-96 shadow-xl card-bordered">
                 <figure>
                     <img src="<%=car[i].imageUrl%>"/>
                 </figure>
@@ -45,20 +43,13 @@
                         <!-- Rented by current user -->
                          <p>Return Date: <strong><%= car[i].returnDate  %></strong></p>
                          <a href="/car/<%= car[i]._id %>/return" class="btn btn-secondary"> Return</a>
-                         <!-- <form action="/car/<%= car[i]._id %>/return" method="POST">
-                            <button class="btn btn-secondary" type="submit">Return</button>
-
-                         </form> -->
-
-
+                        
                         <% } else {%>
                             <!-- Rented by someone else -->
                              <p class="mt-2 text-red-500">
                                  Unavailable until <strong><%= car[i].returnDate %></strong>
                             </p>
                             <% }  %>
-                    <div class="card-actions justify-end">
-                    </div>
                 </div>
             </div>
             <% } %>
