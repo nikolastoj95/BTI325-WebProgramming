@@ -176,14 +176,14 @@ const prepopulateDB =  async () => {
               rentedBy: null
             },
              {
-              model: "Telsa Model 3", 
+              model: "Tesla Model 3", 
               imageUrl: "https://www.tesla.com/ownersmanual/images/GUID-B5641257-9E85-404B-9667-4DA5FDF6D2E7-online-en-US.png",
               returnDate: "",
               rentedBy: null
 
             },
              {
-              model: "Mercedes C400", 
+              model: "Mercedes Benz C400", 
               imageUrl: "https://i.pinimg.com/736x/56/8b/3f/568b3fa0f30bb612c7040b6adef75362.jpg",
               returnDate: "",
               rentedBy: null
