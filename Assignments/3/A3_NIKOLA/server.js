@@ -183,9 +183,6 @@ const prepopulateDB =  async () => {
 
     if ( count === 0 ) {
 
-        //const userNikola= await User.create({email: 'nikola@gmail.com', password:'1234'})
-        //const userCeleste = await User.create({email: 'celeste@gmail.com', password: 'CelesteIsBaby2'})
-
         await Car.insertMany([
             {
               model: "Honda Civic", 
@@ -202,7 +199,7 @@ const prepopulateDB =  async () => {
             },
              {
               model: "Mercedes C400", 
-              imageUrl: "https://i.ytimg.com/vi/mactcc43Jrs/maxresdefault.jpg",
+              imageUrl: "https://i.pinimg.com/736x/56/8b/3f/568b3fa0f30bb612c7040b6adef75362.jpg",
               returnDate: "",
               rentedBy: null
             },
