@@ -49,8 +49,8 @@ app.post("/login", async (req, res)=>{
      console.log(req.body)
     // const eMail = req.body.email
     // const password = req.body.password
-
     //console.log(eMail + ' and ' + password)
+
     //1. search DB for entered info in users collection Find user by email
     let user = await User.findOne({
         email: req.body.email
@@ -62,7 +62,7 @@ app.post("/login", async (req, res)=>{
             email: req.body.email,
             password: req.body.password
         })  
-        //new user is auto logged in below
+        //new user is auto logged in below, go to step 4
     } else {
         //3. If email found but password wrong -> error stay on login
         if (user.password !== req.body.password){
@@ -72,41 +72,17 @@ app.post("/login", async (req, res)=>{
 
     }
     
-    
-
     //4. Email + password match -> success
 
     console.log(req.sessionID)
     console.log(req.session)
-    
+    // create a userSession
     req.session.userInfo = {
         _id: user._id.toString(),
         email: user.email
     }
      console.log(req.session.userInfo.email)
-     
 
-
-
-    // const result = await User.findOne({
-    //     email: req.body.email,
-    //     password: req.body.password
-    // })
-    //console.log(result)
-    // find it now
-    // if (result === null) {
-    //     // no user found create them
-    //     await User.insertOne({
-    //         email: req.body.email,
-    //         password: req.body.password
-    //     })
-    //     console.log('created user')
-
-    // } else {
-    //     // user found, matching, log them in 
-    //     console.log(result)
-    //     return res.redirect("/cars")
-    // }
     return res.redirect("/cars")
 })
 app.get("/logout", async (req,res) => {
@@ -147,7 +123,9 @@ app.post("/book/:carid", async (req,res)=>{
     // get booking form data 
     console.log(req.body)
     console.log(req.body.date)
+    // getting the car id selected in cars page
     const carID = req.params.carid
+    // getting enterd return date
     const date = req.body.date
 
     //the current user from session
@@ -173,9 +151,6 @@ app.get("/car/:carid/return", async(req,res)=> {
 
     )
     return res.redirect("/cars")
-
-
-
 })
 
 const prepopulateDB =  async () => {
