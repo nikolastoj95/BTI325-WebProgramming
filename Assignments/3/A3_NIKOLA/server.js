@@ -21,7 +21,6 @@ const mongoose = require('mongoose')
 app.use(express.static(__dirname + '/public'));  // css files
 
 
-
 // TODO: Put your model and schemas here
 
 const carSchema = new mongoose.Schema({
@@ -120,37 +119,48 @@ app.get("/book/:carid", async (req,res)=>{
     }  
 })
 app.post("/book/:carid", async (req,res)=>{
-    // get booking form data 
-    console.log(req.body)
-    console.log(req.body.date)
-    // getting the car id selected in cars page
-    const carID = req.params.carid
-    // getting enterd return date
-    const date = req.body.date
+    let loggedIn = false
+    if (req.session.userInfo === undefined) {
+        loggedIn = false
+        return res.redirect("/")
+    } else {
+      // get booking form data
+      console.log(req.body);
+      console.log(req.body.date);
+      // getting the car id selected in cars page
+      const carID = req.params.carid;
+      // getting enterd return date
+      const date = req.body.date;
 
-    //the current user from session
-    const currUser = req.session.userInfo
-    console.log(currUser.email + ' and ' +  currUser._id)
+      //the current user from session
+      const currUser = req.session.userInfo;
+      console.log(currUser.email + " and " + currUser._id);
 
-    //update the cars rended by and return date
-    await Car.updateOne(
-        { _id:carID },
-        {$set: {rentedBy: currUser._id, returnDate: date}}
-        
-    )
-    return res.redirect("/cars")
+      //update the cars rended by and return date
+      await Car.updateOne(
+        { _id: carID },
+        { $set: { rentedBy: currUser._id, returnDate: date } }
+      );
+      return res.redirect("/cars");
+    }
+   
 })
 
 app.get("/car/:carid/return", async(req,res)=> {
-    const carID = req.params.carid;
-    //const currUser = req.session.userInfo
+    let loggedIn = false
+    if (req.session.userInfo === undefined) {
+        loggedIn = false
+        return res.redirect("/")
+    } else {
+         const carID = req.params.carid;
+         //const currUser = req.session.userInfo
+         await Car.updateOne(
+           { _id: carID },
+           { $unset: { rentedBy: null, returnDate: "" } }
+         );
+         return res.redirect("/cars");
 
-    await Car.updateOne (
-        {_id:carID },
-        {$unset: {rentedBy: null, returnDate: ''}}
-
-    )
-    return res.redirect("/cars")
+    }
 })
 
 const prepopulateDB =  async () => {
