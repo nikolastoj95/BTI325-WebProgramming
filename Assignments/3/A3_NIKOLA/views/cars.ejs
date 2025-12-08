@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="retro">
+<html lang="en" data-theme="emerald">
 
 <head>
     <meta charset="UTF-8">
@@ -9,14 +9,14 @@
 </head>
 
 <body>
-    <div class="container mx-auto">        
+    <div class="container mx-auto px-4">        
         <!-- menu -->
-        <div class="navbar bg-base-100 my-6">
+        <div class="navbar bg-base-100 my-6 flex flex-col sm:flex-row gap-2 sm:gap-0">
             <div class="flex-1">
                 <a class="btn btn-ghost text-xl" href="/cars">Rent a Car</a>
             </div>
             <div class="flex-none">
-                <a class="btn btn-neutral" href="/logout">Logout</a>
+                <a class="btn btn-error" href="/logout">Logout</a>
             </div>
         </div>
 
@@ -24,16 +24,27 @@
          <% if (loggedIn) { %>
            
        
-            <p class="btn btn-ghost text-xl">Hello, <%= session %></p>
+            <!--<p class="btn btn-ghost text-xl"></p>-->
             <!-- <div class="badge badge-neutral badge-dash">Dash</div> -->
+             <div class="card w-full max-w-sm bg-base-100 card-lg mx-auto">
+            <div class="card-body">
+                <h2 class="card-title">Hello: <%= session %></h2>
+            </div>
+            </div>
+
+
+
+
+
+
          <% }  %>
-        <div class="grid grid-cols-3 gap-4 mt-6">        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 items-stretch">        
             <% for (let i = 0; i < car.length; i++) { %>
-            <div class="card bg-base-250 w-96 shadow-xl card-bordered">
-                <figure>
+            <div class="card bg-base-250 w-full max-w-md shadow-xl card-bordered  mx-auto h-full">
+                <figure class="h-56 lg:h-64 flex items-center justify-center overflow-hidden">
                     <img src="<%=car[i].imageUrl%>"/>
                 </figure>
-                <div class="card-body">
+                <div class="card-body flex flex-col justify-between gap-4 px-8 py-6">
                     <h2 class="card-title"><%= car[i].model%> </h2>
 
                     <% if (!car[i].rentedBy)  { %>
@@ -42,7 +53,7 @@
                     <% } else if ( car[i].rentedBy._id.toString() === user._id.toString()) { %>
                         <!-- Rented by current user -->
                          <p>Return Date: <strong><%= car[i].returnDate  %></strong></p>
-                         <a href="/car/<%= car[i]._id %>/return" class="btn btn-secondary"> Return</a>
+                         <a href="/car/<%= car[i]._id %>/return" class="btn btn-warning"> Return</a>
                         
                         <% } else {%>
                             <!-- Rented by someone else -->
