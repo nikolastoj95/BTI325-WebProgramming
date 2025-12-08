@@ -20,6 +20,27 @@ app.use(session({
 // +++ 2. Required!
 const mongoose = require('mongoose')
 
+// model and sechma
+const personSchema = new mongoose.Schema ({
+    name: String,
+    password: String,
+    isAdmin: Boolean
+})
+const Person = new mongoose.model("persons",personSchema)
+
+const jobSchema = new mongoose.Schema({
+    title: String,
+    description: String,
+    isOpen: Boolean
+})
+const Job = new mongoose.model("jobs", jobSchema)
+
+const appSchema = new mongoose.Schema({
+    job: {type: mongoose.Schema.Types.ObjectId, ref: "jobs"},
+    user: {type: mongoose.Schema.Types.ObjectId, ref:"persons"}
+})
+const Application =new mongoose.model("apps",appSchema  )
+
 
 app.get("/", async (req, res) => {        
     return res.render("home.ejs")
@@ -43,6 +64,7 @@ app.get("/applications", async (req, res) => {
 
 const populateDatabase = async () => {
     // do osmething ehre
+
 
 }
 
