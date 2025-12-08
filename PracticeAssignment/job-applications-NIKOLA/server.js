@@ -64,7 +64,51 @@ app.get("/applications", async (req, res) => {
 
 const populateDatabase = async () => {
     // do osmething ehre
+    const countJ = await Job.countDocuments()
+    const countPer = await Person.countDocuments()
+    if (countJ &&  countPer === 0) {
+        await Job.insertMany([
+            {
+              title: "Data Analysit",
+              description: "Analyize and interpeat data sets, prepare stakeholder presentations", 
+              isOpen: true},
+             {
+              title: "Backend Developer",
+              description: "Responsible for building and maintaining RESTful APIs using Node.js and MongoDB.", 
+              isOpen: true},
+              {
+              title: "Frontend Developer",
+              description: "Responsible for creating stunning user interfaces for the web.", 
+              isOpen: false}
+              
+        ])
 
+        await Person.insertMany([
+                {
+                    name: "adamf@eNet.com",
+                    password: "password123",
+                    isAdmin: true
+                },
+                {
+                    name: "John Blue",
+                    password: "johnjohn2",
+                    isAdmin: false
+                },
+                {
+                    name: "Celeste Prov",
+                    password: "CelesteIsABaby5",
+                    isAdmin: false
+                },
+
+        ])
+
+        console.log("Person and Jobs collections populated!")
+
+
+    }else {
+        console.log("Collection already populated, skipping")
+
+    }
 
 }
 
