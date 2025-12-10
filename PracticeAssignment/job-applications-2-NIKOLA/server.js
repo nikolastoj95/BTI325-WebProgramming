@@ -52,32 +52,56 @@ app.get("/", async (req, res) => {
 
     // Logged in users (non admin) can apply to open jobs
     // Admin users can not apply regarsless of open or not open jobs
-    
+    const currUser = req.session.userInfo
     const showJobs = await Job.find()
     console.log(showJobs)
+    console.log(currUser)
     
-    return res.render("home.ejs",{job: showJobs})
+    return res.render("home.ejs",{job: showJobs, currUser})
 })
 
 // to apply to jobs take job ID and user ID and insert in Applications
+// non Logged In users can not apply
+// Admin users can not apply
+//Only Regular users, logged in can apply
 app.get("/job/apply/:jobID", async (req,res)=>{
+    const currUser = req.session.userInfo
+    if (currUser === undefined || currUser.admin) {
+        console.log("ERROR! You must be logged in to apply to jobs")
+        return res.send("ERROR! You must be logged in to apply to jobs")
+    }
     const jobID = req.params.jobID
     console.log(jobID)
+    
 
      await Application.insertMany({
         job: jobID,
-        user: '6939807c11f6d4d2d9b58878'
+        user: currUser._id
      })
      
-    return res.send(`Appled to job ` + jobID )
+    return res.send(`User: ${currUser._id} --- ${currUser.name} Appled to job  ${jobID}  `)
 })
 
 
 
 app.get("/applications", async (req, res) => {
+    const currUser = req.session.userInfo
+    let applications = []
 
-    const applications = await  Application.find().populate("job").populate("user")
-    console.log(applications)
+    if (currUser === undefined) {
+        console.log("ERROR! You must be logged in to view applications")
+        return res.send("ERROR! You must be logged in to view applications")
+    } else if (currUser.admin) {
+        //admin user can view all user applications
+        applications = await  Application.find().populate("job").populate("user")
+        console.log(applications)
+    } else {
+        // showing applications for logged user
+        applications = await Application.find({user:currUser._id}).populate("job").populate("user")
+        console.log(applications)
+    }
+
+    
 
     return res.render("applications.ejs", {app:applications});
 });
@@ -93,7 +117,7 @@ app.post("/login", async (req, res) => {
 
     //user enters name + password 
     // use find (name)
-    console.log(req.body)
+    console.log(req.body)//user  entered details
     //1. search for the name entered in DB
     const user = await Person.findOne({
         name: req.body.name
@@ -107,16 +131,13 @@ app.post("/login", async (req, res) => {
             password: req.body.password
         })
         // go to step 4
-    } 
-    //3. if user (name) there, but password is wrong, error
+    } else {
+        //3. if user (name) there, but password is wrong, error
         if (user.password !== req.body.password) {
-        console.log("ERROR! Wrong username or password")
-        return res.send("ERROR! Name or Password Do not match")
+            console.log("ERROR! Wrong username or password")
+            return res.send("ERROR! Name or Password Do not match")
+        }
     }
-
-    
-    
-
     // 4. If all matches or user created match -> create a session for that user
     console.log(req.sessionID)
     console.log(req.session)
