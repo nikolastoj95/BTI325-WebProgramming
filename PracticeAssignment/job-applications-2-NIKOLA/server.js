@@ -4,9 +4,12 @@ const express = require("express");
 const app = express();
 app.use(express.static("public"));  // css files
 app.set("view engine", "ejs");      //ejs
+app.set('views', __dirname + '/views')// ejs for vercel
 app.use(express.urlencoded({ extended: true })); //forms
 
 require("dotenv").config()
+
+app.use(express.static(__dirname + '/public'));// css vercel
 
 // sessions
 const session = require("express-session")
