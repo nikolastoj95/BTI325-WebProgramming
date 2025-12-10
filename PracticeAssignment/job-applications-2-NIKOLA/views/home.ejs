@@ -37,7 +37,28 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <% for (let i = 0 ; i< job.length; i++) { %>
+                    <tr>
+                        <td class="font-bold">
+                            <%= job[i].title  %>
+                        </td>
+                        <td>
+                            <%= job[i].description  %>
+                        </td>
+                        <!--condtion to check not logged in see Logn in to apply link
+                        if logged in 
+                        
+                        -->
+                        <td>
+                            <!--<a href="/login">Login to apply</a>-->
+                            <a  href="/job/apply/<%= job[i]._id%>" class="btn btn-soft btn-primary">Apply</a>
+
+
+                        </td>
+                    </tr>
+                <% } %>
+                
+                <!-- <tr>
                     <td class="font-bold">
                         Front End Developer
                     </td>
@@ -45,18 +66,7 @@
                         Create stunning user interfaces for the web. Flexible hours.
                     </td>
                     <td>
-                        <a href="/login">Login to apply</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="font-bold">
-                        Front End Developer
-                    </td>
-                    <td>
-                        Create stunning user interfaces for the web. Flexible hours.
-                    </td>
-                    <td>
-                        <!-- if needed, change this to suit your implementation -->
+                        if needed, change this to suit your implementation 
                         <button class="btn btn-soft btn-primary">Apply</button>
                     </td>
                 </tr>
@@ -70,7 +80,7 @@
                     <td>
                         <p class="text-error">Not accepting applications</p>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
