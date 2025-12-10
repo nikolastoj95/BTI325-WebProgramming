@@ -20,8 +20,39 @@ app.use(session({
 // +++ 2. Required!
 const mongoose = require('mongoose')
 
+// DB models + schema
 
-app.get("/", async (req, res) => {        
+const personSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+    isAdmin: {type: Boolean, default: false }
+})
+const Person = new mongoose.model("peoples",personSchema )
+
+const jobSchema = new mongoose.Schema ({
+    title: String,
+    description: String,
+    isOpen: Boolean
+})
+
+const Job = new mongoose.model("jobs", jobSchema)
+
+// application
+// everyone application has a user + job 
+
+const appSchema = new mongoose.Schema({
+    job: {type: mongoose.Schema.Types.ObjectId, ref:"jobs"},
+    user:{type: mongoose.Schema.Types.ObjectId, ref:"peoples"}
+})
+const Application = new mongoose.model("apps",appSchema)
+
+
+
+
+
+app.get("/", async (req, res) => {    
+    // show the home page
+    // not logged in     
     return res.render("home.ejs")
 })
 
@@ -43,6 +74,54 @@ app.get("/applications", async (req, res) => {
 
 const populateDatabase = async () => {
     // do osmething ehre
+     const jobCount =  await Job.countDocuments()
+     if (jobCount === 0) {
+
+        await Job.insertMany([
+            {
+                title: "Front End Developer",
+                description: "Create stunning user interfaces for the web",
+                isOpen: true
+            },
+            {
+                title: "Back End Developer",
+                description: "Create endpoints, using express, node, and mongo",
+                isOpen: false
+            },
+            {
+                title: "Data Analysit",
+                description: "Clean, anylyize large complex data sets and perpare statjeholder presentatons",
+                isOpen: true
+            }
+
+        ])
+         
+        await Person.insertMany([
+            {
+                name: "Nikola",
+                password: "GISniki95",
+                isAdmin: false
+            },
+            {
+                name: "Alex",
+                password: "password123",
+                isAdmin: true
+            },
+            {
+                name: "Celeste",
+                password: "celeste5",
+                isAdmin: false
+            }
+
+
+
+        ])
+
+        console.log("Jobs, and persons are populated in DB")
+
+     } else {
+        console.log("Jobs and peole already have documents, skipping")
+     }
 
 }
 
