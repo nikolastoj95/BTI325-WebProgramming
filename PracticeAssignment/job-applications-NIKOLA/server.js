@@ -109,7 +109,9 @@ app.get("/apply/job/:jobID", async (req,res)=>{
 //GET
 //show application page
 app.get("/applications", async (req, res) => {
+    let error = false
     if (req.session.userInfo === undefined) {
+        error = true
         return res.redirect("/")
     }
 
