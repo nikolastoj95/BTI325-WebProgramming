@@ -14,19 +14,27 @@
             <p class="text-xl">Jobs Website</p>
         </div>
         <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">                
+              
+            <ul class="menu menu-horizontal px-1">
+                <% if(currUser === undefined)  { %> 
+                 
                 <li><a href="/login">Login</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="/applications">Applications</a></li>
-                <li><a href="/logout">Logout</a></li>                    
+                <% } else { %>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/applications">Applications</a></li>
+                    <li><a href="/logout">Logout</a></li>   
+                <% } %>                       
             </ul>
         </div>
     </div>
 
 
     <div class="w-2xl mx-auto mt-4">
+        <% if(currUser !== undefined) {%>
+            <p>Welcome <%= currUser.name  %> </p>
+        <% }   %>
 
-        <p>Welcome user@gmail.com! </p>
+       
 
         <table class="table my-6">
             <thead>
@@ -45,16 +53,33 @@
                         <td>
                             <%= job[i].description  %>
                         </td>
-                        <!--condtion to check not logged in see Logn in to apply link
-                        if logged in 
-                        
-                        -->
+                        <% if(currUser === undefined) { %>
                         <td>
-                            <!--<a href="/login">Login to apply</a>-->
-                            <a  href="/job/apply/<%= job[i]._id%>" class="btn btn-soft btn-primary">Apply</a>
-
-
+                            <a href="/login">Login to apply</a>
                         </td>
+
+                        <% } else  { %>
+                            <% if (job[i].isOpen && !currUser.admin)  {%>
+                                <td>
+                                    <a  href="/job/apply/<%= job[i]._id%>" class="btn btn-soft btn-primary">Apply</a>
+                                </td>
+                                <% } else if (!job[i].isOpen && !currUser.admin) {%>
+                                        <td>
+                                            <p class="text-error">Not accepting applications</p>
+                                        </td>
+
+                                <% }else { %>
+
+                                    <td>
+                                        <p class="text-error">You are Admin, Can Not Apply</p>
+                                    </td>
+                                        
+
+
+                                    <%}   %>
+
+                                
+                            <% } %>
                     </tr>
                 <% } %>
                 
