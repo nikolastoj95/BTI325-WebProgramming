@@ -46,30 +46,97 @@ const appSchema = new mongoose.Schema({
 })
 const Application = new mongoose.model("apps",appSchema)
 
-
-
-
-
 app.get("/", async (req, res) => {    
     // show the home page
-    // not logged in     
-    return res.render("home.ejs")
+    // not logged in  or logged in
+
+    // Logged in users (non admin) can apply to open jobs
+    // Admin users can not apply regarsless of open or not open jobs
+    
+    const showJobs = await Job.find()
+    console.log(showJobs)
+    
+    return res.render("home.ejs",{job: showJobs})
 })
 
+// to apply to jobs take job ID and user ID and insert in Applications
+app.get("/job/apply/:jobID", async (req,res)=>{
+    const jobID = req.params.jobID
+    console.log(jobID)
+
+     await Application.insertMany({
+        job: jobID,
+        user: '6939807c11f6d4d2d9b58878'
+     })
+     
+    return res.send(`Appled to job ` + jobID )
+})
+
+
+
+app.get("/applications", async (req, res) => {
+
+    const applications = await  Application.find().populate("job").populate("user")
+    console.log(applications)
+
+    return res.render("applications.ejs", {app:applications});
+});
+
+
+
+// logins + auth
 app.get("/login", (req, res) => {
     res.render("login.ejs");
 });
 app.post("/login", async (req, res) => {
     // endpoint to login
-    return res.send("login post endpoint")
+
+    //user enters name + password 
+    // use find (name)
+    console.log(req.body)
+    //1. search for the name entered in DB
+    const user = await Person.findOne({
+        name: req.body.name
+    })
+    console.log(user)
+
+    // 2.if no name was found in DB, create user then
+    if (!user) {
+        user = await Person.create({
+            name: req.body.name,
+            password: req.body.password
+        })
+        // go to step 4
+    } 
+    //3. if user (name) there, but password is wrong, error
+        if (user.password !== req.body.password) {
+        console.log("ERROR! Wrong username or password")
+        return res.send("ERROR! Name or Password Do not match")
+    }
+
+    
+    
+
+    // 4. If all matches or user created match -> create a session for that user
+    console.log(req.sessionID)
+    console.log(req.session)
+    //create a session
+    req.session.userInfo = {
+        _id: user._id.toString(),
+        name: user.name,
+        admin: user.isAdmin
+    }
+    console.log(req.session.userInfo)
+    console.log(`Session created for this user ${req.session.userInfo.name} `)
+
+
+    return res.redirect("/")
 })
 
 app.get("/logout", (req, res) => {
-    return res.send("logout")
-});
-
-app.get("/applications", async (req, res) => {
-    return res.render("applications.ejs");
+    req.session.destroy()
+    console.log("Logged Out")
+    return res.redirect("/")
 });
 
 const populateDatabase = async () => {
