@@ -14,41 +14,81 @@
             <p class="text-xl">Jobs Website</p>
         </div>
         <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">                
-                <li><a href="/login">Login</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="/applications">Applications</a></li>
-                <li><a href="/logout">Logout</a></li>                    
+            <ul class="menu menu-horizontal px-1">  
+                <% if (!loggedIn)  {%> 
+                    <li><a href="/login">Login</a></li>   
+                <% } else { %>
+                    <li><a href="/">Home</a></li> 
+                    <li><a href="/applications">Applications</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                <% } %>
+                                 
             </ul>
         </div>
     </div>
 
 
-    <div class="w-2xl mx-auto mt-4">
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+        <% if (loggedIn)  {%>
 
-        <p>Welcome user@gmail.com! </p>
+       
+        <% if (currUser.admin) {%>
+            <p>Welcome <%= name %>! Admin User</p>
+        <% }  else { %>
+            <p>Welcome <%= name %>! </p>
+        <% } %>
 
-        <table class="table my-6">
+      <% } %>
+
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Job Title</th>
+                    <th>Title</th>
                     <th>Description</th>
                     <th>Apply?</th>
                 </tr>
             </thead>
             <tbody>
+                  <% for (let i = 0 ; i < job.length; i++) {%>
                 <tr>
-                    <td class="font-bold">
-                        Front End Developer
-                    </td>
-                    <td>
-                        Create stunning user interfaces for the web. Flexible hours.
-                    </td>
+                    <td><%= job[i].title%></td>
+                    <td><%= job[i].description%></td>
+                    <% if (loggedIn)  { %>
+                        <% if (job[i].isOpen && currUser.admin === false )  { %>
+                            <!--regualer user, job open -> show apply link-->
+                            <td>
+                                <!-- if needed, change this to suit your implementation -->
+                                <a href="/apply/job/<%=job[i]._id%>" class="btn btn-soft btn-primary">Apply</a>
+                            </td>
+                             <% } else if (job[i].isOpen === false && currUser.admin === false) { %>
+                                <td>
+                                    <p class="text-red-600">Job Posting Not Open</p>
+                                 </td>
+
+
+
+                             <% } else {  %>
+                                <td>
+                                    <p class="text-red-600">Can Not Apply You are admin</p>
+                                 </td>
+
+                             <% } %>
+
+
+                       
+                    
+                    
+                    <% } else {%>
+
                     <td>
                         <a href="/login">Login to apply</a>
                     </td>
+
+                    <% } %>
+                    
                 </tr>
-                <tr>
+                <%  } %>
+                <!-- <tr>
                     <td class="font-bold">
                         Front End Developer
                     </td>
@@ -56,11 +96,11 @@
                         Create stunning user interfaces for the web. Flexible hours.
                     </td>
                     <td>
-                        <!-- if needed, change this to suit your implementation -->
+                        if needed, change this to suit your implementation 
                         <button class="btn btn-soft btn-primary">Apply</button>
                     </td>
-                </tr>
-                <tr>
+                </tr> 
+                 <tr>
                     <td class="font-bold">
                         Front End Developer
                     </td>
@@ -70,7 +110,7 @@
                     <td>
                         <p class="text-error">Not accepting applications</p>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
