@@ -36,18 +36,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        an234j81391ksdjp5q
-                    </td>
-                    <td>
-                        Front End Developer
-                    </td>
-                    <td>
-                        Alice
-                    </td>
-                </tr>
-                <tr>
+                <% for(let i =0 ; i< app.length;i++) {%>
+                    <tr>
+                        <td>
+                            <%= app[i]._id  %>
+                        </td>
+                        <td>
+                            <%= app[i].job.title %>
+                        </td>
+                        <td>
+                            <%= app[i].user.name  %>
+                        </td>
+                    </tr>
+
+                
+                <% } %>
+              
+                <!-- <tr>
                     <td>
                         ab172381298232d3d
                     </td>
@@ -57,7 +62,7 @@
                     <td>
                         Bob
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
