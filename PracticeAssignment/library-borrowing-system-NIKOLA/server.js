@@ -35,6 +35,7 @@ const User = new mongoose.model("users",userSchema)
 const bookSchema = new mongoose.Schema({
     title: String,
     author: String,
+    quantity: Number,
     isAvailble: Boolean
 })
 const Book = new mongoose.model("books",bookSchema)
@@ -53,36 +54,114 @@ app.get("/", async (req,res)=>{
     // home endpoint
     // view all books in library
 
+    const currUser = req.session.userInfo
     const showBooks = await Book.find()
 
-    return res.render("home.ejs", {book:showBooks})
+    return res.render("home.ejs", {book:showBooks, currUser})
 })
 
 app.get("/borrow/:bookID", async (req,res)=>{
+    const currUser = req.session.userInfo
+    const getBooks = await Book.find()
+
+    if (currUser === undefined) {
+        console.log("ERROR! Must be Logged in to Borrow Book!")
+       return res.redirect("/")
+    } else if (currUser.admin === true) {
+        console.log("ERROR! You are a Admin can not borrow Books")
+       return res.redirect("/")
+    }
+    // let user borrow book, are logged in, not a admin
     const bookID = req.params.bookID
     console.log(bookID)
 
     await Borrow.insertMany({
         book: bookID,
-        user: '693a0e896cc865ae2f643edc' //Alice
+        user: currUser._id //whose ever user._id is that
     })
 
     return res.send(`Book borrowed!, ${bookID}`)
 })
 
 app.get("/borrowlist",async (req,res)=> {
+    const currUser = req.session.userInfo;
+    if (currUser === undefined) {
+        console.log("ERROR: Need to be Logged IN to view borrow list")
+        return res.redirect("/")
+    }
+    let borrowedBooks = []
 
-    const borrowedBooks = await Borrow.find().populate("book").populate("user")
-    console.log(borrowedBooks)
+    if (currUser.admin === true ) {
+        borrowedBooks = await Borrow.find().populate("book").populate("user")
+        console.log(borrowedBooks)
+    }else {
+         borrowedBooks = await Borrow.find({user: currUser._id}).populate("book").populate("user")
+         console.log(borrowedBooks)
+    }
+    
 
     //return res.send("show list, find all")
-    return res.render("borrow.ejs", {bookLoan: borrowedBooks})
+    return res.render("borrow.ejs", {bookLoan: borrowedBooks, currUser})
 })
 
 //LOGIN -AUTH 
 app.get("/login",(req,res)=>{
     // show the login form
     return res.render("login.ejs")
+})
+
+app.post("/login", async(req,res)=>{
+    //to get login details from form
+    console.log(req.body)
+    //1. find the name in DB if it is match login
+
+    let user = await User.findOne({
+        email: req.body.email
+        
+    })
+    console.log(user)
+
+    // 2. no user was found in DB make a new user
+    if (!user) {
+        user = await User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        })
+    } else{
+        //3. user there but wrong password
+        if (user.password !== req.body.password) {
+            console.log("ERROR! Wrong password Try again")
+            return res.redirect("/login")
+        }
+    }
+
+    // 4. user found, password matchs -> MATCH Proceed to LOGIN
+
+    //make a user session
+    console.log(req.sessionID)
+    console.log(req.session)
+
+    // attach user to current session
+    req.session.userInfo = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        admin: user.isAdmin
+    }
+    console.log(req.session.userInfo )
+    console.log(req.sessionID)
+
+
+    return res.redirect("/")
+})
+
+app.get("/logout",(req,res)=>{
+    req.session.destroy()
+    console.log("loggout session distroyed")
+    
+
+    return res.redirect("/")
 })
 
 
@@ -96,16 +175,19 @@ const populateDatabase = async () =>{
             {
                 title: "Hungar Games Book One" ,
                 author: "Suzanne Collins",
+                quantity: 5,
                 isAvailble: true
             },
              {
                 title: "Atomic Habits" ,
                 author: "James Clear",
+                quantity: 3,
                 isAvailble: true
             },
              {
                 title: "Catching Fire-Book2 " ,
                 author: "Suzanne Collins",
+                quantity: 0,
                 isAvailble: false
             }
 
