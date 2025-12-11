@@ -9,7 +9,7 @@
 <body>
   <div class="navbar bg-base-100 shadow-sm bg-neutral text-neutral-content">
         <div class="flex-1">
-            <p class="text-xl">Library</p>
+            <p class="text-xl">On Loan - Borrowed </p>
         </div>
         <div class="flex-none">
               
@@ -19,7 +19,6 @@
                 <li><a href="/login">Login</a></li>
                 
                     <li><a href="/">Home</a></li>
-                    <li><a href="/applications">Applications</a></li>
                     <li><a href="/logout">Logout</a></li>   
                                    
             </ul>
@@ -32,27 +31,22 @@
     <!-- head -->
     <thead>
       <tr>
-        <th>Book</th>
-        <th>Author</th>
-        <th>Availble</th>
-        <th>Borrow?</th>
+        <th>Loan Number</th>
+        <th>Book Title</th>
+        <th>Borrower</th>
       </tr>
     </thead>
     <tbody>
-      <% for (let i =0 ; i< book.length; i++)  {%>
+      <% for (let i =0 ; i< bookLoan.length; i++)  {%>
       <!-- row 1 -->
       <tr>
-        <th><%=book[i].title  %></th>
-        <td><%= book[i].author  %></td>
-        <% if (book[i].isAvailble)  {%>
-          <td>Yes</td>
-          <% } else { %>
-          <td>No</td>
-          <% } %>
+        <th><%=bookLoan[i]._id  %></th>
+        <td><%= bookLoan[i].book.title  %></td>
+         <td><%= bookLoan[i].user.name  %></td>
+       
        
       
-     
-      <td><a href="/borrow/<%=book[i]._id%>" class="btn btn-primary">Borrow</a></td>
+    
       </tr>
        <% } %>
     </tbody>
