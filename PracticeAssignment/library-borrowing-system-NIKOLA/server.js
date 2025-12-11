@@ -70,10 +70,19 @@ app.get("/borrow/:bookID", async (req,res)=>{
     return res.send(`Book borrowed!, ${bookID}`)
 })
 
-app.get("/borrowlist",(req,res)=> {
+app.get("/borrowlist",async (req,res)=> {
 
+    const borrowedBooks = await Borrow.find().populate("book").populate("user")
+    console.log(borrowedBooks)
 
-    return res.render("borrow.ejs")
+    //return res.send("show list, find all")
+    return res.render("borrow.ejs", {bookLoan: borrowedBooks})
+})
+
+//LOGIN -AUTH 
+app.get("/login",(req,res)=>{
+    // show the login form
+    return res.render("login.ejs")
 })
 
 
