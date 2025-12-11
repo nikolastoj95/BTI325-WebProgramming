@@ -35,7 +35,7 @@ const User = new mongoose.model("users",userSchema)
 const bookSchema = new mongoose.Schema({
     title: String,
     author: String,
-    isAvailble: {type:Boolean, default: false}
+    isAvailble: Boolean
 })
 const Book = new mongoose.model("books",bookSchema)
 
@@ -49,12 +49,86 @@ const borrowSchema = new mongoose.Schema({
  const Borrow = new mongoose.model("borrows",borrowSchema)
 
 
-app.get("/",(req,res)=>{
-    return res.render("home.ejs")
+app.get("/", async (req,res)=>{
+    // home endpoint
+    // view all books in library
+
+    const showBooks = await Book.find()
+
+    return res.render("home.ejs", {book:showBooks})
+})
+
+app.get("/borrow/:bookID", async (req,res)=>{
+    const bookID = req.params.bookID
+    console.log(bookID)
+
+    await Borrow.insertMany({
+        book: bookID,
+        user: '693a0e896cc865ae2f643edc' //Alice
+    })
+
+    return res.send(`Book borrowed!, ${bookID}`)
+})
+
+app.get("/borrowlist",(req,res)=> {
+
+
+    return res.render("borrow.ejs")
 })
 
 
-const populateDatabase = async () =>{}
+const populateDatabase = async () =>{
+
+    const countB = await  Book.countDocuments()
+
+    if (countB === 0){
+
+        await Book.insertMany([
+            {
+                title: "Hungar Games Book One" ,
+                author: "Suzanne Collins",
+                isAvailble: true
+            },
+             {
+                title: "Atomic Habits" ,
+                author: "James Clear",
+                isAvailble: true
+            },
+             {
+                title: "Catching Fire-Book2 " ,
+                author: "Suzanne Collins",
+                isAvailble: false
+            }
+
+        ])
+
+        await User.insertMany([
+            {
+                name: "Alice",
+                email: "alice@gmail.com",
+                password: "alice123",
+                isAdmin: false
+            },
+            {
+                name: "Celeste",
+                email: "celesteJuicyGirl@hotmail.com",
+                password: "CelesteIsBaby5",
+                isAdmin: false
+            },
+            {
+                name: "Roger",
+                email: "rogerMan@libraryNet.ca",
+                password: "password1",
+                isAdmin: true
+            }
+        ])
+        console.log("books and users collection successfully populated with data!")
+    } else {
+        console.log("already contains data, skipping")
+    }
+
+
+}
 
 async function startServer() {
     try {
