@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cupcake">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body>
+  <div class="navbar bg-base-100 shadow-sm bg-neutral text-neutral-content">
+        <div class="flex-1">
+            <p class="text-xl">Library</p>
+        </div>
+        <div class="flex-none">
+              
+            <ul class="menu menu-horizontal px-1">
+                
+                 
+                <li><a href="/login">Login</a></li>
+                
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/applications">Applications</a></li>
+                    <li><a href="/logout">Logout</a></li>   
+                                   
+            </ul>
+        </div>
+    </div>
+
+    <!--content-->
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 content-center m-15 ">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Availble</th>
+        <th>Borrow?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i =0 ; i< book.length; i++)  {%>
+      <!-- row 1 -->
+      <tr>
+        <th><%=book[i].title  %></th>
+        <td><%= book[i].author  %></td>
+        <% if (book[i].isAvailble)  {%>
+          <td>Yes</td>
+          <% } else { %>
+          <td>No</td>
+          <% } %>
+       
+      
+     
+      <td><a href="/borrow/<%=book[i]._id%>" class="btn btn-primary">Borrow</a></td>
+      </tr>
+       <% } %>
+    </tbody>
+  </table>
+</div>
+
+
+ 
+   
+</body>
+</html>
