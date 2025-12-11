@@ -23,6 +23,36 @@ const mongoose = require('mongoose')
 
 // DB models + schema
 
+// user collection
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String,
+    isAdmin: {type:Boolean, default: false}
+})
+const User = new mongoose.model("users",userSchema)
+// books collection
+const bookSchema = new mongoose.Schema({
+    title: String,
+    author: String,
+    isAvailble: {type:Boolean, default: false}
+})
+const Book = new mongoose.model("books",bookSchema)
+
+// borrowings collection // relationship
+// each borrow record contains a user, and a book
+
+const borrowSchema = new mongoose.Schema({
+      book: {type: mongoose.Schema.Types.ObjectId, ref: "books" },
+      user: {type: mongoose.Schema.Types.ObjectId, ref: "users" }
+ })
+ const Borrow = new mongoose.model("borrows",borrowSchema)
+
+
+app.get("/",(req,res)=>{
+    return res.render("home.ejs")
+})
+
 
 const populateDatabase = async () =>{}
 
