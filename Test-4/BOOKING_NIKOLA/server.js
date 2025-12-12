@@ -4,9 +4,12 @@ const express = require("express");
 const app = express();
 app.use(express.static("public"));  // css files
 app.set("view engine", "ejs");      // ejs
+app.set('views', __dirname + '/views') //ejs vercel
 app.use(express.urlencoded({ extended: true })); // forms
 
 require("dotenv").config()
+
+app.use(express.static(__dirname + '/public')) // css vercel
 
 const session = require("express-session")
 app.use(session({
@@ -35,11 +38,28 @@ const Timeslot = mongoose.model("timeslots", timeslotSchema)
 // 1. Home Page endpoints
 app.get("/", async (req, res) => {    
     // get all the timeslots from the database and display in UI.
-    const slots = await Timeslot.find()    
+    const slots = await Timeslot.find()  
+    
+    
     return res.render("home.ejs", {timeslots:slots})
 })
-app.post("/book/:id", async (req,res)=>{        
-    return res.send(`Success, your reservation number is ${req.params.id}. <a href="/">Home</a>`)
+app.get("/bookingForm",(req,res)=>{
+    return res.render("bookingForm.ejs")
+})
+
+
+app.post("/book/:id", async (req,res)=>{   
+    console.log( "Time Slot ID picked: " + req.params.id)  
+    console.log(req.body.txtCustomer)
+    const timeSlotID = req.params.id
+    const customerName = req.body.txtCustomer
+    await Timeslot.findByIdAndUpdate(timeSlotID, {
+        customer: customerName
+        }
+    )
+    
+
+    return res.send(`Success, your reservation number is ${timeSlotID}. <a href="/">Home</a>`)
 })
 app.get("/remind/:id", async (req,res)=>{     
     console.log("sdfdsf")   
@@ -48,22 +68,71 @@ app.get("/remind/:id", async (req,res)=>{
 
 // 2. Manage Bookings endpoints
 app.get("/manage", async (req,res)=>{
+    // booking screen, only a manager can see this
+    const currUser = req.session.userInfo
+    if (currUser === undefined) {
+        console.log("You are not a manager, manager only can see this")
+        return res.redirect ("/")
+    }
     const slots = await Timeslot.find()
     return res.render("manageBookings.ejs", {timeslots:slots})
 })
-app.get("/cancel/:id", async (req,res)=>{    
+app.get("/cancel/:id", async (req,res)=>{ 
+    // cancel slot, part of booking screen, only a manager can see this
+    const currUser = req.session.userInfo
+    if (currUser === undefined) {
+        console.log("You are not a manager, manager only can see this")
+        return res.redirect ("/")
+    }
+    const slotID = req.params.id;
+    console.log(slotID) 
+
+    await Timeslot.findByIdAndUpdate(slotID, {
+        $unset: {
+             customer: ""
+        }
+    })
+    
+
     return res.send(`Reservation cancelled. <a href="/manage">Manage Bookings?</a>`)
 })
 
 
 // 3. Login/Logout endpoints
-app.get("/login", (req,res)=>{
+app.get("/login", async(req,res)=>{
+    // shows login form
     return res.render("login.ejs")
 })
-app.post("/login", async (req,res)=>{    
+
+app.post("/login", async (req,res)=>{  
+    //handle login data
+    console.log(req.body)
+
+    //1. search and find in DB  the name entered
+    let users = await Manager.findOne({
+        name: req.body.name
+    })
+
+    if (!users) {
+        console.log("ERROR! Invalid Manager Name try again")
+        return res.redirect("/login")
+    }  
+    // otherwise name is match in Manager DB save in session, login 
+    console.log(req.sessionID)
+    console.log(req.session)
+
+    req.session.userInfo ={
+        _id: users._id,
+        name: users.name
+    }
+    console.log(req.session.userInfo)
+    console.log("Mananger Logged In")
+
     return res.redirect("/manage")    
 })
-app.get("/logout", (req,res) => {        
+app.get("/logout", (req,res) => { 
+    req.session.destroy()    
+    console.log("Logged out")
     return res.redirect("/")
 })
 
