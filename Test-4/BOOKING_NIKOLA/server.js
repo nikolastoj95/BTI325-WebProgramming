@@ -67,10 +67,15 @@ app.post("/book/:id", async (req,res)=>{
     return res.send(`Success, your reservation number is ${timeSlotID}. <a href="/">Home</a>`)
 })
 app.get("/remind/:id", async (req,res)=>{   
-    const remindID = req.params.id
-    console.log(remindID)
+    const remindSlotID = req.params.id
+    console.log(remindSlotID)
     console.log(req.sessionID)
 
+    const time = await Timeslot.findById(remindSlotID)
+    console.log(time)
+
+    
+    //return res.render("home.ejs",{time, timeslots: slots})
     return res.send(`Reminder feature activated! <a href="/">Home</a>`)
 })
 
