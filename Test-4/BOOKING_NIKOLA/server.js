@@ -68,12 +68,9 @@ app.post("/book/:id", async (req,res)=>{
 })
 app.get("/remind/:id", async (req,res)=>{   
     const remindID = req.params.id
-    //console.log(remindID)
+    console.log(remindID)
     console.log(req.sessionID)
 
-
-    
-    
     return res.send(`Reminder feature activated! <a href="/">Home</a>`)
 })
 
