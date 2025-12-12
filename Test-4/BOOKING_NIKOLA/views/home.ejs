@@ -46,15 +46,25 @@
             <div class="flex flex-row justify-start gap-6 items-center my-2 p-4 border border-neutral-content rounded-sm">
                 <!-- time -->
                <p><%= timeslots[i].time %></p>
-               
-                <!-- reminder link  -->
+               <% if (timeslots[i].customer) { %>
+                <!--if customer exsits, do not show book, and remainder show only unavailable-->
+                    <p>Unavailbale</p>
+               <% } else { %>
+                <!--no customer in this slot, show book form-->
+                 <!-- reminder link  -->
                 <a href="/remind/99999999" class="btn btn-neutral btn-outline">Set Reminder</a>   
 
                 <!-- booking form -->
-                <form action="/book/99999999" method="POST" class="join">
+                <form action="/book/<%=timeslots[i]._id%>" method="POST" class="join">
                     <input type="text" name="txtCustomer" class="input" placeholder="What's your name?"/>
                     <button class="btn btn-primary join-item">Book</button>
-                </form>                       
+                </form> 
+
+
+
+               <% } %>
+               
+                                     
                 
             </div>
         <% } %>   
