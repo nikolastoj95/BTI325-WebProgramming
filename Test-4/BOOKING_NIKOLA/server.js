@@ -47,13 +47,15 @@ app.get("/bookingForm",(req,res)=>{
     return res.render("bookingForm.ejs")
 })
 
-app.get("/book/:id",(req,res)=>{
 
+app.get("/book/:id",(req,res)=>{
+    //endpoint to show bookingForm
     const slotID = req.params.id
     return res.render("bookingForm.ejs", {slotID})
 })
 
 app.post("/book/:id", async (req,res)=>{   
+    //process booking form
     console.log( "Time Slot ID picked: " + req.params.id)  
     console.log(req.body.txtCustomer)
     const timeSlotID = req.params.id
