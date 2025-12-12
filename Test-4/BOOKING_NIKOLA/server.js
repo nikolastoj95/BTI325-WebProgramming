@@ -47,6 +47,11 @@ app.get("/bookingForm",(req,res)=>{
     return res.render("bookingForm.ejs")
 })
 
+app.get("/book/:id",(req,res)=>{
+
+    const slotID = req.params.id
+    return res.render("bookingForm.ejs", {slotID})
+})
 
 app.post("/book/:id", async (req,res)=>{   
     console.log( "Time Slot ID picked: " + req.params.id)  
@@ -57,12 +62,16 @@ app.post("/book/:id", async (req,res)=>{
         customer: customerName
         }
     )
-    
-
     return res.send(`Success, your reservation number is ${timeSlotID}. <a href="/">Home</a>`)
 })
-app.get("/remind/:id", async (req,res)=>{     
-    console.log("sdfdsf")   
+app.get("/remind/:id", async (req,res)=>{   
+    const remindID = req.params.id
+    console.log(remindID)
+    console.log(req.sessionID)
+
+
+    
+    
     return res.send(`Reminder feature activated! <a href="/">Home</a>`)
 })
 
@@ -113,7 +122,7 @@ app.post("/login", async (req,res)=>{
         name: req.body.name
     })
 
-    if (!users) {
+    if (users === null) {
         console.log("ERROR! Invalid Manager Name try again")
         return res.redirect("/login")
     }  
