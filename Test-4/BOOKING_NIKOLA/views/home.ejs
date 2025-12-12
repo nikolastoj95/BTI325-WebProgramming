@@ -28,7 +28,7 @@
     <div role="alert" class="alert alert-warning my-4 w-xl mx-auto">
         <span>
             <a href="/" class="link" >
-                Click here to continue booking for 23:59?
+                Click here to continue booking for  <%  %>?
             </a>
         </span>
     </div> 
@@ -47,12 +47,12 @@
                 <!-- time -->
                <p><%= timeslots[i].time %></p>
                <% if (timeslots[i].customer) { %>
-                <!--if customer exsits, do not show book, and remainder show only unavailable-->
+                <!--if customer exsits, do not show book, and remainder , show only unavailable-->
                     <p>Unavailbale</p>
                <% } else { %>
                 <!--no customer in this slot, show book form-->
                  <!-- reminder link  -->
-                <a href="/remind/99999999" class="btn btn-neutral btn-outline">Set Reminder</a>   
+                <a href="/remind/<%=timeslots[i]._id %>" class="btn btn-neutral btn-outline">Set Reminder</a>   
 
                 <!-- booking form -->
                 <form action="/book/<%=timeslots[i]._id%>" method="POST" class="join">
